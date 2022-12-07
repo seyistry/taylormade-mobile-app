@@ -9,7 +9,7 @@ export default function SplashMain() {
             <Image
                 style={styles.logo}
                 data-media={ids.logo}
-                source={require("../../assets/splash.png")}
+                source={require("../../assets/img/splash.png")}
             />
         </View>
     );
