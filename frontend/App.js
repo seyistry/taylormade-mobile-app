@@ -1,8 +1,11 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import * as Font from "expo-font";
 import Constants from "expo-constants";
 import { blackBg } from "./utils/color";
 import SplashMain from "./screens/splashscreen/SplashMain";
+import React, { useEffect, useState } from "react";
+import AuthView from "./screens/splashscreen/AuthView";
 
 function AppStatusBar({ backgroundColor, ...props }) {
     return (
@@ -18,19 +21,51 @@ function AppStatusBar({ backgroundColor, ...props }) {
     );
 }
 
+let customFonts = {
+    LatoXb: require("./assets/fonts/Lato-Black.ttf"),
+    LatoR: require("./assets/fonts/Lato-Regular.ttf"),
+    LatoM: require("./assets/fonts/Lato-Light.ttf"),
+    LatoB: require("./assets/fonts/Lato-Bold.ttf"),
+};
+
 export default function App() {
-    return (
-        <>
-            <AppStatusBar backgroundColor={blackBg} style="light" />
-            <View style={styles.container}>
-                <SplashMain />
-            </View>
-        </>
-    );
+    const [fontsLoaded, setFontsLoaded] = useState(false);
+
+    async function loadFontsAsync() {
+        await Font.loadAsync(customFonts);
+        await setTimeout(() => {
+            setFontsLoaded(true);
+        }, 1000);
+    }
+
+    useEffect(() => {
+        loadFontsAsync();
+    }, [fontsLoaded]);
+
+    if (!fontsLoaded) {
+        return (
+            <>
+                <AppStatusBar backgroundColor={blackBg} style="light" />
+                <View style={styles.container}>
+                    <SplashMain />
+                </View>
+            </>
+        );
+    } else {
+        return (
+            <>
+                <AppStatusBar backgroundColor={blackBg} style="light" />
+                <View style={styles.container}>
+                    <AuthView />
+                </View>
+            </>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        color: "white",
     },
 });
