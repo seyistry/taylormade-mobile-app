@@ -24,8 +24,8 @@ export default function AuthView() {
                 <Text style={[styles.text, styles.t1]}>CREATE YOUR</Text>
                 <Text style={[styles.text, styles.t2]}>IDEAL BODY</Text>
                 <Text style={styles.t3}>
-                    Develop your dream muscle body with our training mobile app
-                    whether at home without equipment or at the gym
+                    Develop your dream muscle body with our training{'\n'}mobile app
+                    whether at home without equipment{'\n'}or at the gym
                 </Text>
             </View>
             <View
@@ -95,12 +95,10 @@ const { ids, styles } = StyleSheet.create({
         fontFamily: "LatoR",
         "@media (max-width: 700px)": {
             fontSize: 17,
-            paddingHorizontal: "10%",
             paddingVertical: 20, 
         },
         "@media (max-width: 400px)": {
             fontSize: 14,
-            paddingHorizontal: "8%",
             paddingVertical: 10,
         },
     },
