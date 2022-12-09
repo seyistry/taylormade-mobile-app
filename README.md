@@ -29,10 +29,5 @@ This will open Expo Developer Tools in the browser. You can then do one of the f
 -   Use an Android Emulator or iOS Simulator to run the app: - [iOS Simulator Setup](https://docs.expo.io/workflow/ios-simulator/) - [Android Emulator Setup](https://docs.expo.io/workflow/android-studio-emulator/)
     }
 
-```
-
-
 ## Author
-
-- [@seyi Egunjobi](https://github.com/seyistry/)
-```
+- [seyi Egunjobi](https://github.com/seyistry/)
