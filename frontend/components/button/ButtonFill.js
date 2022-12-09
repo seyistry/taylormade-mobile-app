@@ -9,6 +9,7 @@ const ButtonFill = (props) => {
                 styles.btnContainer,
                 { backgroundColor: props.fill ? blueBg : greyBg },
             ]}
+            onPress={props.onPress}
         >
             <Text style={{ color: white, fontFamily: "LatoXb" }}>
                 {props.name}
