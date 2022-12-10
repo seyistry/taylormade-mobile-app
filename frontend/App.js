@@ -6,6 +6,7 @@ import { blackBg } from "./utils/color";
 import SplashMain from "./screens/splashscreen/SplashMain";
 import React, { useEffect, useState } from "react";
 import AuthView from "./screens/splashscreen/AuthView";
+import LoginMain from "./screens/login/LoginMain";
 
 function AppStatusBar({ backgroundColor, ...props }) {
     return (
@@ -56,7 +57,7 @@ export default function App() {
             <>
                 <AppStatusBar backgroundColor={blackBg} style="light" />
                 <View style={styles.container}>
-                    <AuthView />
+                    <LoginMain />
                 </View>
             </>
         );
