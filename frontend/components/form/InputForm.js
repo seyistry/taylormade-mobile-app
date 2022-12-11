@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     },
     input: {
         color: greyText,
-        fontFamily: "LatoM",
+        fontFamily: "LatoR",
         width: "84%",
         // paddingHorizontal: "5%",
     },
