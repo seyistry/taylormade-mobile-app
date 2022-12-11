@@ -2,11 +2,12 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, SafeAreaView } from "react-native";
 import * as Font from "expo-font";
 import Constants from "expo-constants";
-import { blackBg } from "./utils/color";
+import { blackBg, greyBg, white } from "./utils/color";
 import SplashMain from "./screens/splashscreen/SplashMain";
 import React, { useEffect, useState } from "react";
 import AuthView from "./screens/splashscreen/AuthView";
 import LoginMain from "./screens/login/LoginMain";
+import SignUpStack from "./navigation/SignUpStack";
 
 function AppStatusBar({ backgroundColor, ...props }) {
     return (
@@ -25,8 +26,8 @@ function AppStatusBar({ backgroundColor, ...props }) {
 let customFonts = {
     LatoXb: require("./assets/fonts/Lato-Black.ttf"),
     LatoR: require("./assets/fonts/Lato-Regular.ttf"),
-    LatoM: require("./assets/fonts/Lato-Light.ttf"),
     LatoB: require("./assets/fonts/Lato-Bold.ttf"),
+    LatoL: require("./assets/fonts/Lato-Light.ttf"),
 };
 
 export default function App() {
@@ -55,9 +56,9 @@ export default function App() {
     } else {
         return (
             <>
-                <AppStatusBar backgroundColor={blackBg} style="light" />
+                <AppStatusBar backgroundColor={greyBg} style="light" />
                 <View style={styles.container}>
-                    <LoginMain />
+                    <SignUpStack />
                 </View>
             </>
         );
@@ -67,6 +68,6 @@ export default function App() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        color: "white",
+        color: white,
     },
 });
