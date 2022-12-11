@@ -1,36 +1,21 @@
-import { View, Image } from "react-native";
+import { View, StyleSheet } from "react-native";
 import React from "react";
 import { blackBg } from "../../utils/color";
-import StyleSheet from "react-native-media-query";
+import SplashImg from "../../assets/img/splashImg";
 
 export default function SplashMain() {
     return (
-        <View style={styles.container} data-media={ids.container}>
-            <Image
-                style={styles.logo}
-                data-media={ids.logo}
-                source={require("../../assets/img/splash.png")}
-            />
+        <View style={styles.container}>
+            <SplashImg />
         </View>
     );
 }
 
-const { ids, styles } = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: blackBg,
         alignItems: "center",
         justifyContent: "center",
-    },
-    logo: {
-        width: 100,
-        "@media (max-width: 700px)": {
-            width: 300,
-            height: 260,
-        },
-        "@media (max-width: 400px)": {
-            width: 169,
-            height: 145,
-        },
     },
 });
