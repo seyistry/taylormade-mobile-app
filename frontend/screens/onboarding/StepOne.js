@@ -29,7 +29,7 @@ const StepOne = ({ navigation }) => {
             >
                 <Image
                     style={styles.image}
-                    source={require("../../assets/img/step.png")}
+                    source={require("../../assets/img/stepOneImg.png")}
                     resizeMode="contain"
                 />
                 <ButtonFill fill={true} name="CONTINUE" />
