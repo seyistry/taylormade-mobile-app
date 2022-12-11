@@ -4,6 +4,9 @@ import { blackBg, greyBg, white } from "../../utils/color";
 import ButtonFill from "../../components/button/ButtonFill";
 
 const StepOne = ({ navigation }) => {
+    const handlePress = () => {
+        navigation.navigate("STEP 2 OF 20");
+    };
     return (
         <View style={styles.container}>
             <View
@@ -32,7 +35,7 @@ const StepOne = ({ navigation }) => {
                     source={require("../../assets/img/stepOneImg.png")}
                     resizeMode="contain"
                 />
-                <ButtonFill fill={true} name="CONTINUE" />
+                <ButtonFill onPress={handlePress} fill={true} name="CONTINUE" />
             </LinearGradient>
         </View>
     );
