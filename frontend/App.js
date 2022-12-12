@@ -1,13 +1,11 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import { StyleSheet, View, SafeAreaView } from "react-native";
 import * as Font from "expo-font";
 import Constants from "expo-constants";
 import { blackBg, greyBg, white } from "./utils/color";
 import SplashMain from "./screens/splashscreen/SplashMain";
 import React, { useEffect, useState } from "react";
-import AuthView from "./screens/splashscreen/AuthView";
-import LoginMain from "./screens/login/LoginMain";
-import SignUpStack from "./navigation/SignUpStack";
+import PreAuthStack from "./navigation/PreAuthStack";
 
 function AppStatusBar({ backgroundColor, ...props }) {
     return (
@@ -58,7 +56,7 @@ export default function App() {
             <>
                 <AppStatusBar backgroundColor={greyBg} style="light" />
                 <View style={styles.container}>
-                    <SignUpStack />
+                    <PreAuthStack />
                 </View>
             </>
         );
