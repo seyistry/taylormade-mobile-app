@@ -10,6 +10,7 @@ const ButtonFill = (props) => {
                 { backgroundColor: props.fill ? blueBg : greyBg },
             ]}
             onPress={props.onPress}
+            disabled={props.disabled}
         >
             <Text style={{ color: white, fontFamily: "LatoXb" }}>
                 {props.name}
