@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, SafeAreaView } from "react-native";
 import * as Font from "expo-font";
 import Constants from "expo-constants";
-import { blackBg, greyBg, white } from "./utils/color";
+import { blackBg, greyHeader, white } from "./utils/color";
 import SplashMain from "./screens/splashscreen/SplashMain";
 import React, { useEffect, useState } from "react";
 import PreAuthStack from "./navigation/PreAuthStack";
@@ -54,7 +54,7 @@ export default function App() {
     } else {
         return (
             <>
-                <AppStatusBar backgroundColor={greyBg} style="light" />
+                <AppStatusBar backgroundColor={greyHeader} style="light" />
                 <View style={styles.container}>
                     <PreAuthStack />
                 </View>
