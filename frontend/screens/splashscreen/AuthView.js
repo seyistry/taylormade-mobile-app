@@ -5,7 +5,13 @@ import { blackBg } from "../../utils/color";
 import ButtonFill from "../../components/button/ButtonFill";
 import ButtonFillNone from "../../components/button/ButtonFillNone";
 
-export default function AuthView() {
+export default function AuthView({ navigation }) {
+    const handlePressReg = () => {
+        navigation.navigate("STEP 1 OF 20");
+    };
+    const handlePressLog = () => {
+        navigation.navigate("Login");
+    };
     return (
         <View style={styles.container}>
             <View style={styles.imgContainer}>
@@ -24,8 +30,8 @@ export default function AuthView() {
                 <Text style={[styles.text, styles.t1]}>CREATE YOUR</Text>
                 <Text style={[styles.text, styles.t2]}>IDEAL BODY</Text>
                 <Text style={styles.t3}>
-                    Develop your dream muscle body with our training{'\n'}mobile app
-                    whether at home without equipment{'\n'}or at the gym
+                    Develop your dream muscle body with our training{"\n"}mobile
+                    app whether at home without equipment{"\n"}or at the gym
                 </Text>
             </View>
             <View
@@ -35,8 +41,12 @@ export default function AuthView() {
                     // alignItems: "center",
                 }}
             >
-                <ButtonFill name="REGISTER" fill={true} />
-                <ButtonFillNone />
+                <ButtonFill
+                    name="REGISTER"
+                    fill={true}
+                    onPress={handlePressReg}
+                />
+                <ButtonFillNone onPress={handlePressLog} />
             </View>
         </View>
     );
@@ -95,7 +105,7 @@ const { ids, styles } = StyleSheet.create({
         fontFamily: "LatoR",
         "@media (max-width: 700px)": {
             fontSize: 17,
-            paddingVertical: 20, 
+            paddingVertical: 20,
         },
         "@media (max-width: 400px)": {
             fontSize: 14,

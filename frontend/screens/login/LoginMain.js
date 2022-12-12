@@ -24,7 +24,7 @@ const schema = yup
     })
     .required();
 
-const LoginMain = () => {
+const LoginMain = ({ navigation }) => {
     const [email, setEmail] = useState(false);
 
     const {
