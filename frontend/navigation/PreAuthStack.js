@@ -45,7 +45,7 @@ function MyStack() {
     );
 }
 
-export default function SignUpStack() {
+export default function PreAuthStack() {
     return (
         <NavigationContainer>
             <MyStack />
