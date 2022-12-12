@@ -1,7 +1,9 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import LoginMain from "../screens/login/LoginMain";
 import StepOne from "../screens/onboarding/StepOne";
 import StepTwo from "../screens/onboarding/StepTwo";
+import AuthView from "../screens/splashscreen/AuthView";
 import { white, greyBg } from "../utils/color";
 
 const Stack = createStackNavigator();
@@ -23,6 +25,20 @@ function MyStack() {
                 headerTintColor: white,
             }}
         >
+            <Stack.Screen
+                name="Auth"
+                component={AuthView}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="Login"
+                component={LoginMain}
+                options={{
+                    headerShown: false,
+                }}
+            />
             <Stack.Screen name="STEP 1 OF 20" component={StepOne} />
             <Stack.Screen name="STEP 2 OF 20" component={StepTwo} />
         </Stack.Navigator>
