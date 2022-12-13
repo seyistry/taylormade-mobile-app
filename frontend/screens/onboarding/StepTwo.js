@@ -5,23 +5,7 @@ import { blackBg, white } from "../../utils/color";
 import { useState } from "react";
 
 export default function StepTwo({ navigation }) {
-    const [toggle, setToggle] = useState(false);
-    const [weightLoss, setWeightLoss] = useState(false);
-    const [muscleGain, setMuscleGain] = useState(false);
-    const handleMuscleGainPress = () => {
-        setToggle(true);
-        setMuscleGain(() => {
-            setWeightLoss(false);
-            return true;
-        });
-    };
-    const handleWeightLossPress = () => {
-        setToggle(true);
-        setWeightLoss(() => {
-            setMuscleGain(false);
-            return true;
-        });
-    };
+    const [toggle, setToggle] = useState(null);
 
     const handleSubmit = () => {
         navigation.navigate("STEP 3 OF 20");
@@ -41,14 +25,14 @@ export default function StepTwo({ navigation }) {
                 <GoalsCard
                     name="MUSCLE GAIN"
                     imageLink={require("../../assets/img/musclegain.png")}
-                    onPress={handleMuscleGainPress}
-                    fill={muscleGain}
+                    onPress={() => setToggle("MUSCLE GAIN")}
+                    fill={toggle === "MUSCLE GAIN" ? true : false}
                 />
                 <GoalsCard
                     name="WEIGHT LOSS"
                     imageLink={require("../../assets/img/weightloss.png")}
-                    onPress={handleWeightLossPress}
-                    fill={weightLoss}
+                    onPress={() => setToggle("WEIGHT LOSS")}
+                    fill={toggle === "WEIGHT LOSS" ? true : false}
                 />
             </View>
             <View>
