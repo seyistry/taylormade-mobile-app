@@ -35,7 +35,13 @@ export default function StepTwo({ navigation }) {
                     fill={toggle === "WEIGHT LOSS" ? true : false}
                 />
             </View>
-            <View>
+            <View
+                style={{
+                    height: "20%",
+                    justifyContent: "flex-end",
+                    paddingBottom: 20,
+                }}
+            >
                 <ButtonFill
                     name="CONTINUE"
                     fill={toggle}

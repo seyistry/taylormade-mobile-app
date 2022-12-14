@@ -45,7 +45,7 @@ const StepThree = ({ navigation }) => {
                 style={{
                     height: "20%",
                     justifyContent: "flex-end",
-                    paddingBottom: 10,
+                    paddingBottom: 20,
                 }}
             >
                 <ButtonFill
