@@ -2,6 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import LoginMain from "../screens/login/LoginMain";
 import StepEight from "../screens/onboarding/StepEight";
+import StepEighteen from "../screens/onboarding/StepEighteen";
 import StepEleven from "../screens/onboarding/StepEleven";
 import StepFifteen from "../screens/onboarding/StepFifteen";
 import StepFive from "../screens/onboarding/StepFive";
@@ -73,6 +74,13 @@ function MyStack() {
             <Stack.Screen
                 name="STEP 17 OF 20"
                 component={StepSeventeen}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="STEP 18 OF 20"
+                component={StepEighteen}
                 options={{
                     headerShown: false,
                 }}
