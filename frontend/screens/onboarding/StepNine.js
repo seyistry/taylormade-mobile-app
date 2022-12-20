@@ -3,8 +3,9 @@ import { useState } from "react";
 import { blackBg, white } from "../../utils/color";
 import MotivateCard from "../../components/card/MotivateCard";
 import ButtonFill from "../../components/button/ButtonFill";
+import DailyCard from "../../components/card/dailyCard";
 
-const StepThree = ({ navigation }) => {
+const StepNine = ({ navigation }) => {
     const [idOne, setIdOne] = useState(false);
     const [idFive, setIdFive] = useState(false);
     const [idTwo, setIdTwo] = useState(false);
@@ -12,7 +13,7 @@ const StepThree = ({ navigation }) => {
     const [idFour, setIdFour] = useState(false);
 
     const handleSubmit = () => {
-        navigation.navigate("STEP 4 OF 20");
+        navigation.navigate("STEP 10 OF 20");
     };
     return (
         <View style={styles.container}>
@@ -27,29 +28,47 @@ const StepThree = ({ navigation }) => {
             </View>
             <View style={{ height: "60%" }}>
                 <MotivateCard
-                    onPress={() => setIdOne(!idOne)}
+                    onPress={() => {
+                        setIdOne(!idOne);
+                        setIdFive(false);
+                    }}
                     fill={idOne}
-                    name="BUILDING STRENGTH AND ENDURANCE"
+                    name="BUSY WORK OR FAMILY LIFE"
                 />
                 <MotivateCard
-                    onPress={() => setIdTwo(!idTwo)}
+                    onPress={() => {
+                        setIdTwo(!idTwo);
+                        setIdFive(false);
+                    }}
                     fill={idTwo}
-                    name="BUILDING STRENGTH AND ENDURANCE"
+                    name="STRESS OR MENTAL HEALTH"
                 />
                 <MotivateCard
-                    onPress={() => setIdThree(!idThree)}
+                    onPress={() => {
+                        setIdThree(!idThree);
+                        setIdFive(false);
+                    }}
                     fill={idThree}
-                    name="BUILDING STRENGTH AND ENDURANCE"
+                    name="HEALTH OR HORMONAL ISSUES"
                 />
                 <MotivateCard
-                    onPress={() => setIdFour(!idFour)}
+                    onPress={() => {
+                        setIdFour(!idFour);
+                        setIdFive(false);
+                    }}
                     fill={idFour}
-                    name="BUILDING STRENGTH AND ENDURANCE"
+                    name="LACK OF MOTIVATION"
                 />
-                <MotivateCard
-                    onPress={() => setIdFive(!idFive)}
+                <DailyCard
+                    onPress={() => {
+                        setIdOne(false);
+                        setIdTwo(false);
+                        setIdThree(false);
+                        setIdFour(false);
+                        setIdFive(!idFive);
+                    }}
                     fill={idFive}
-                    name="BUILDING STRENGTH AND ENDURANCE"
+                    name="NONE OF THE ABOVE"
                 />
             </View>
             <View
@@ -70,7 +89,7 @@ const StepThree = ({ navigation }) => {
     );
 };
 
-export default StepThree;
+export default StepNine;
 
 const styles = StyleSheet.create({
     container: {

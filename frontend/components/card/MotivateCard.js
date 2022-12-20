@@ -25,7 +25,7 @@ export default function MotivateCard(props) {
             </View>
 
             <View style={{ width: "60%" }}>
-                <Text style={styles.text}>BUILDING STRENGTH AND ENDURANCE</Text>
+                <Text style={styles.text}>{props.name}</Text>
             </View>
             <View style={{ width: "20%", alignItems: "center" }}>
                 <Ionicons name="male" size={30} color={white} />
