@@ -6,6 +6,10 @@ import { blackBg, greyHeader, white } from "./utils/color";
 import SplashMain from "./screens/splashscreen/SplashMain";
 import React, { useEffect, useState } from "react";
 import PreAuthStack from "./navigation/PreAuthStack";
+import PlanView from "./screens/plan/PlanView";
+import MealView from "./screens/meal/MealView";
+import MealInfo from "./screens/meal/MealInfo";
+import Tabs from "./navigation/Tabs";
 
 function AppStatusBar({ backgroundColor, ...props }) {
     return (
@@ -56,7 +60,7 @@ export default function App() {
             <>
                 <AppStatusBar backgroundColor={greyHeader} style="light" />
                 <View style={styles.container}>
-                    <PreAuthStack />
+                    <Tabs />
                 </View>
             </>
         );

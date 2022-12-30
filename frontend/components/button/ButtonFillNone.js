@@ -5,7 +5,9 @@ import { white } from "../../utils/color";
 const ButtonFillNone = (props) => {
     return (
         <TouchableOpacity style={styles.btnContainer} onPress={props.onPress}>
-            <Text style={{ color: white, fontFamily: "LatoXb" }}>LOG IN</Text>
+            <Text style={{ color: white, fontFamily: "LatoXb" }}>
+                {props.name}
+            </Text>
         </TouchableOpacity>
     );
 };

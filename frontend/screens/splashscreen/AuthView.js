@@ -46,7 +46,7 @@ export default function AuthView({ navigation }) {
                     fill={true}
                     onPress={handlePressReg}
                 />
-                <ButtonFillNone onPress={handlePressLog} />
+                <ButtonFillNone onPress={handlePressLog} name="LOG IN" />
             </View>
         </View>
     );
