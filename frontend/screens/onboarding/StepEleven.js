@@ -47,7 +47,7 @@ export default function StepEleven({ navigation }) {
         );
         setSelectedCm(() => cmRange.indexOf(value));
         setSelectedInch(index);
-        console.log(index);
+        // console.log(index);
         setChange(true);
     }
 
