@@ -224,7 +224,7 @@ export default function StepTwelve({ navigation }) {
                             selectedIndicatorStyle={styles.wheelIndicator}
                             itemTextStyle={styles.wheelText}
                             containerStyle={styles.wheelContainer}
-                            scaleFunction={(x) => 0.7}
+                            // scaleFunction={(x) => 0.7}
                             decelerationRate="fast"
                         />
                         <View
@@ -253,7 +253,7 @@ export default function StepTwelve({ navigation }) {
                             selectedIndicatorStyle={styles.wheelIndicator}
                             itemTextStyle={styles.wheelText}
                             containerStyle={styles.wheelContainer}
-                            scaleFunction={(x) => 0.7}
+                            // scaleFunction={(x) => 0.7}
                             decelerationRate="fast"
                         />
                     </View>
@@ -272,7 +272,7 @@ export default function StepTwelve({ navigation }) {
                             selectedIndicatorStyle={styles.wheelIndicator}
                             itemTextStyle={styles.wheelText}
                             containerStyle={styles.wheelContainer}
-                            scaleFunction={(x) => 0.7}
+                            // scaleFunction={(x) => 0.7}
                             decelerationRate="fast"
                         />
                         <View
@@ -301,7 +301,7 @@ export default function StepTwelve({ navigation }) {
                             selectedIndicatorStyle={styles.wheelIndicator}
                             itemTextStyle={styles.wheelText}
                             containerStyle={styles.wheelContainer}
-                            scaleFunction={(x) => 0.7}
+                            // scaleFunction={(x) => 0.7}
                             decelerationRate="fast"
                         />
                     </View>

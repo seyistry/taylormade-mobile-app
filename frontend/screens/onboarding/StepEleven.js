@@ -202,7 +202,7 @@ export default function StepEleven({ navigation }) {
                         ]}
                         itemTextStyle={styles.wheelText}
                         containerStyle={{ width: "100%" }}
-                        scaleFunction={(x) => 0.7}
+                        // scaleFunction={(x) => 0.7}
                         decelerationRate="fast"
                     />
                 ) : (
@@ -220,7 +220,7 @@ export default function StepEleven({ navigation }) {
                             selectedIndicatorStyle={styles.wheelIndicator}
                             itemTextStyle={styles.wheelText}
                             containerStyle={styles.wheelContainer}
-                            scaleFunction={(x) => 0.7}
+                            // scaleFunction={(x) => 0.7}
                             decelerationRate="fast"
                         />
                         <View
@@ -249,7 +249,7 @@ export default function StepEleven({ navigation }) {
                             selectedIndicatorStyle={styles.wheelIndicator}
                             itemTextStyle={styles.wheelText}
                             containerStyle={styles.wheelContainer}
-                            scaleFunction={(x) => 0.7}
+                            // scaleFunction={(x) => 0.7}
                             decelerationRate="fast"
                         />
                     </View>

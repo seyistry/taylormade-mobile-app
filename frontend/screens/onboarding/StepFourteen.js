@@ -109,7 +109,7 @@ export default function StepFourteen({ navigation }) {
                     selectedIndicatorStyle={styles.wheelIndicator}
                     itemTextStyle={styles.wheelText}
                     containerStyle={styles.wheelContainer}
-                    scaleFunction={(x) => 0.7}
+                    // scaleFunction={(x) => 0.7}
                     decelerationRate="fast"
                 />
             </View>
