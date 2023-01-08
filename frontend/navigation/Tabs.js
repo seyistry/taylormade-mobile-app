@@ -25,8 +25,8 @@ function MyTabs() {
                     backgroundColor: greyHeader,
                     paddingTop: 10,
                     paddingBottom: 10,
-                    borderColor: blackBg,
                     height: 60,
+                    borderTopWidth: 0,
                 },
             }}
         >
@@ -78,7 +78,11 @@ function MyTabs() {
                 options={{
                     tabBarLabel: "Settings",
                     tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="ios-settings" size={24} color={color} />
+                        <Ionicons
+                            name="ios-settings-sharp"
+                            size={size}
+                            color={color}
+                        />
                     ),
                 }}
             />
@@ -87,9 +91,5 @@ function MyTabs() {
 }
 
 export default function Tabs() {
-    return (
-        <NavigationContainer>
-            <MyTabs />
-        </NavigationContainer>
-    );
+    return <MyTabs />;
 }

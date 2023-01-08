@@ -1,4 +1,7 @@
 import { StatusBar } from "expo-status-bar";
+import { useKeepAwake } from "expo-keep-awake";
+import { Provider } from "react-redux";
+import store from "./store";
 import { StyleSheet, View, SafeAreaView } from "react-native";
 import * as Font from "expo-font";
 import Constants from "expo-constants";
@@ -6,10 +9,13 @@ import { blackBg, greyHeader, white } from "./utils/color";
 import SplashMain from "./screens/splashscreen/SplashMain";
 import React, { useEffect, useState } from "react";
 import PreAuthStack from "./navigation/PreAuthStack";
+import { useSelector, useDispatch } from "react-redux";
 import PlanView from "./screens/plan/PlanView";
 import MealView from "./screens/meal/MealView";
 import MealInfo from "./screens/meal/MealInfo";
 import Tabs from "./navigation/Tabs";
+import PostAuthStack from "./navigation/PostAuthStack";
+import Main from "./Main";
 
 function AppStatusBar({ backgroundColor, ...props }) {
     return (
@@ -42,6 +48,8 @@ export default function App() {
         }, 1000);
     }
 
+    useKeepAwake();
+
     useEffect(() => {
         loadFontsAsync();
     }, [fontsLoaded]);
@@ -57,12 +65,10 @@ export default function App() {
         );
     } else {
         return (
-            <>
+            <Provider store={store}>
                 <AppStatusBar backgroundColor={greyHeader} style="light" />
-                <View style={styles.container}>
-                    <Tabs />
-                </View>
-            </>
+                <Main />
+            </Provider>
         );
     }
 }
@@ -70,7 +76,6 @@ export default function App() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        color: white,
         backgroundColor: blackBg,
     },
 });
