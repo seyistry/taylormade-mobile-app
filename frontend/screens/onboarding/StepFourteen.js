@@ -47,7 +47,7 @@ export default function StepFourteen({ navigation }) {
             </View>
             <View
                 style={{
-                    height: "30%",
+                    height: "25%",
                     flexDirection: "row",
                     justifyContent: "center",
                     alignItems: "center",

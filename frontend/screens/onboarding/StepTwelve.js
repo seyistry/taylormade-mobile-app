@@ -89,7 +89,7 @@ export default function StepTwelve({ navigation }) {
             </View>
             <View
                 style={{
-                    height: "30%",
+                    height: "25%",
                     flexDirection: "row",
                     justifyContent: "center",
                     alignItems: "center",
