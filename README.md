@@ -10,7 +10,7 @@ Clone the repository, change directories, and use npm or yarn to install the dep
 
 ```bash
 $ git clone https://github.com/seyistry/taylormade-mobile-app.git
-$ cd  taylormade-mobile-app/frontend
+$ cd  taylormade-mobile-app
 $ yarn install
 ```
 
