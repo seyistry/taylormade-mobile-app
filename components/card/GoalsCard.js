@@ -9,7 +9,7 @@ export default function GoalsCard(props) {
                 styles.container,
                 { backgroundColor: props.fill ? blueBg : greyBg },
             ]}
-			onPress={props.onPress}
+            onPress={props.onPress}
         >
             <View style={styles.box}>
                 <Text style={styles.text}>{props.name}</Text>
@@ -17,7 +17,7 @@ export default function GoalsCard(props) {
             <View style={styles.box}>
                 <Image
                     style={styles.image}
-                    source={props.imageLink}
+                    source={{ uri: props.imageLink }}
                     resizeMode="contain"
                 />
             </View>
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     },
     image: {
         height: "100%",
-        alignSelf: "center",
+        // alignSelf: "center",
     },
     text: {
         color: white,
