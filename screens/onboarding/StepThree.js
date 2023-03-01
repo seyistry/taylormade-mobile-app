@@ -1,15 +1,32 @@
 import { StyleSheet, Text, View } from "react-native";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { blackBg, white } from "../../utils/color";
 import MotivateCard from "../../components/card/MotivateCard";
 import ButtonFill from "../../components/button/ButtonFill";
+import { RegContext } from "../../utils/RegContext";
 
 const StepThree = ({ navigation }) => {
+    const regLoaded = useContext(RegContext);
     const [idOne, setIdOne] = useState(false);
     const [idFive, setIdFive] = useState(false);
     const [idTwo, setIdTwo] = useState(false);
     const [idThree, setIdThree] = useState(false);
     const [idFour, setIdFour] = useState(false);
+
+    const dictSec = {
+        1: () => setIdOne(!idOne),
+        2: () => setIdTwo(!idTwo),
+        3: () => setIdThree(!idThree),
+        4: () => setIdFour(!idFour),
+        5: () => setIdFive(!idFive),
+    };
+    const dictPry = {
+        1: idOne,
+        2: idTwo,
+        3: idThree,
+        4: idFour,
+        5: idFive,
+    };
 
     const handleSubmit = () => {
         navigation.navigate("STEP 4 OF 20");
@@ -26,31 +43,14 @@ const StepThree = ({ navigation }) => {
                 <Text style={styles.text}>WHAT MOTIVATES YOU TO EXERCISE?</Text>
             </View>
             <View style={{ height: "60%" }}>
-                <MotivateCard
-                    onPress={() => setIdOne(!idOne)}
-                    fill={idOne}
-                    name="BUILDING STRENGTH AND ENDURANCE"
-                />
-                <MotivateCard
-                    onPress={() => setIdTwo(!idTwo)}
-                    fill={idTwo}
-                    name="BUILDING STRENGTH AND ENDURANCE"
-                />
-                <MotivateCard
-                    onPress={() => setIdThree(!idThree)}
-                    fill={idThree}
-                    name="BUILDING STRENGTH AND ENDURANCE"
-                />
-                <MotivateCard
-                    onPress={() => setIdFour(!idFour)}
-                    fill={idFour}
-                    name="BUILDING STRENGTH AND ENDURANCE"
-                />
-                <MotivateCard
-                    onPress={() => setIdFive(!idFive)}
-                    fill={idFive}
-                    name="BUILDING STRENGTH AND ENDURANCE"
-                />
+                {regLoaded[1].data.map((item) => (
+                    <MotivateCard
+                        key={item.id}
+                        onPress={() => dictSec[item.id]()}
+                        fill={dictPry[item.id]}
+                        name={item.description}
+                    />
+                ))}
             </View>
             <View
                 style={{
