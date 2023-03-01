@@ -17,7 +17,7 @@ export default function BodyTypeCard(props) {
             <View style={styles.box}>
                 <Image
                     style={styles.image}
-                    source={props.imageLink}
+                    source={{ uri: props.imageLink }}
                     resizeMode="contain"
                 />
             </View>
@@ -38,7 +38,6 @@ const styles = StyleSheet.create({
     },
     image: {
         height: "100%",
-        alignSelf: "center",
     },
     text: {
         color: white,

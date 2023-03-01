@@ -16,7 +16,7 @@ import MealInfo from "./screens/meal/MealInfo";
 import Tabs from "./navigation/Tabs";
 import PostAuthStack from "./navigation/PostAuthStack";
 import Main from "./Main";
-import { goalUrl, motiveUrl } from "./utils/apiLinks";
+import { bodyTypeUrl, goalUrl, motiveUrl } from "./utils/apiLinks";
 import { RegContext } from "./utils/RegContext";
 
 function AppStatusBar({ backgroundColor, ...props }) {
@@ -60,7 +60,14 @@ export default function App() {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
             }),
-            fetch(motiveUrl),
+            fetch(motiveUrl, {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
+            }),
+            fetch(bodyTypeUrl, {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
+            }),
         ])
             .then((responses) => {
                 // Get a JSON object from each of the responses

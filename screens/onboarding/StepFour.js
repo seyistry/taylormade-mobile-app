@@ -1,10 +1,12 @@
 import { StyleSheet, Text, View } from "react-native";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { blackBg, white } from "../../utils/color";
 import ButtonFill from "../../components/button/ButtonFill";
 import BodyTypeCard from "../../components/card/BodyTypeCard";
+import { RegContext } from "../../utils/RegContext";
 
 const StepFour = ({ navigation }) => {
+    const regLoaded = useContext(RegContext);
     const [id, setId] = useState(false);
     const [toggle, setToggle] = useState(null);
 
@@ -23,39 +25,30 @@ const StepFour = ({ navigation }) => {
                 <Text style={styles.text}>CHOOSE YOUR BODY TYPE</Text>
             </View>
             <View style={{ height: "60%" }}>
-                <BodyTypeCard
-                    name="SKINNY"
-                    imageLink={require("../../assets/img/skinnyBody.png")}
-                    onPress={() =>
-                        setId(() => {
-                            setToggle(true);
-                            return 1;
-                        })
-                    }
-                    fill={id === 1 ? true : false}
-                />
-                <BodyTypeCard
-                    name="AVERAGE"
-                    imageLink={require("../../assets/img/averageBody.png")}
-                    onPress={() =>
-                        setId(() => {
-                            setToggle(true);
-                            return 2;
-                        })
-                    }
-                    fill={id === 2 ? true : false}
-                />
-                <BodyTypeCard
-                    name="HEAVIER"
-                    imageLink={require("../../assets/img/weightloss.png")}
-                    onPress={() =>
-                        setId(() => {
-                            setToggle(true);
-                            return 3;
-                        })
-                    }
-                    fill={id === 3 ? true : false}
-                />
+                {regLoaded[2].data
+                    .sort((a, b) => {
+                        if (a.id > b.id) {
+                            return -1;
+                        }
+                    })
+                    .map((item) => {
+                        if (item.target === "0") {
+                            return (
+                                <BodyTypeCard
+                                    key={item.id}
+                                    name={item.name}
+                                    imageLink={item.image}
+                                    onPress={() =>
+                                        setId(() => {
+                                            setToggle(true);
+                                            return item.id;
+                                        })
+                                    }
+                                    fill={id === item.id ? true : false}
+                                />
+                            );
+                        }
+                    })}
             </View>
             <View
                 style={{
