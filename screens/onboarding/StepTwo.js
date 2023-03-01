@@ -2,11 +2,12 @@ import { StyleSheet, Text, View } from "react-native";
 import ButtonFill from "../../components/button/ButtonFill";
 import GoalsCard from "../../components/card/GoalsCard";
 import { blackBg, white } from "../../utils/color";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { RegContext } from "../../utils/RegContext";
 
 export default function StepTwo({ navigation }) {
     const [toggle, setToggle] = useState(null);
-
+    const regLoaded = useContext(RegContext);
     const handleSubmit = () => {
         navigation.navigate("STEP 3 OF 20");
     };
@@ -22,18 +23,17 @@ export default function StepTwo({ navigation }) {
                 <Text style={styles.text}>SET YOUR GOALS</Text>
             </View>
             <View style={{ flex: 1, height: "60%" }}>
-                <GoalsCard
-                    name="MUSCLE GAIN"
-                    imageLink={require("../../assets/img/musclegain.png")}
-                    onPress={() => setToggle("MUSCLE GAIN")}
-                    fill={toggle === "MUSCLE GAIN" ? true : false}
-                />
-                <GoalsCard
-                    name="WEIGHT LOSS"
-                    imageLink={require("../../assets/img/weightloss.png")}
-                    onPress={() => setToggle("WEIGHT LOSS")}
-                    fill={toggle === "WEIGHT LOSS" ? true : false}
-                />
+                {regLoaded[0].data.map((item) => {
+                    return (
+                        <GoalsCard
+                            key={item.id}
+                            name={item.description}
+                            imageLink={item.image}
+                            onPress={() => setToggle(item.description)}
+                            fill={toggle === item.description ? true : false}
+                        />
+                    );
+                })}
             </View>
             <View
                 style={{

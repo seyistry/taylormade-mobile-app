@@ -16,6 +16,8 @@ import MealInfo from "./screens/meal/MealInfo";
 import Tabs from "./navigation/Tabs";
 import PostAuthStack from "./navigation/PostAuthStack";
 import Main from "./Main";
+import { goalUrl, motiveUrl } from "./utils/apiLinks";
+import { RegContext } from "./utils/RegContext";
 
 function AppStatusBar({ backgroundColor, ...props }) {
     return (
@@ -40,6 +42,7 @@ let customFonts = {
 
 export default function App() {
     const [fontsLoaded, setFontsLoaded] = useState(false);
+    const [regLoaded, setRegLoaded] = useState();
 
     async function loadFontsAsync() {
         await Font.loadAsync(customFonts);
@@ -52,7 +55,31 @@ export default function App() {
 
     useEffect(() => {
         loadFontsAsync();
-    }, [fontsLoaded]);
+        Promise.all([
+            fetch(goalUrl, {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
+            }),
+            fetch(motiveUrl),
+        ])
+            .then((responses) => {
+                // Get a JSON object from each of the responses
+                return Promise.all(
+                    responses.map((response) => {
+                        return response.json();
+                    })
+                );
+            })
+            .then((data) => {
+                // Log the data to the console
+                // You would do something with both sets of data here
+                setRegLoaded(data);
+            })
+            .catch((error) => {
+                // if there's an error, log it
+                console.log(error);
+            });
+    }, [fontsLoaded, regLoaded]);
 
     if (!fontsLoaded) {
         return (
@@ -67,7 +94,9 @@ export default function App() {
         return (
             <Provider store={store}>
                 <AppStatusBar backgroundColor={greyHeader} style="light" />
-                <Main />
+                <RegContext.Provider value={regLoaded}>
+                    <Main />
+                </RegContext.Provider>
             </Provider>
         );
     }
