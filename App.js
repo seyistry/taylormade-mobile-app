@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { useKeepAwake } from "expo-keep-awake";
 import { Provider } from "react-redux";
 import store from "./store";
-import { StyleSheet, View, SafeAreaView } from "react-native";
+import { StyleSheet, View, SafeAreaView, Alert } from "react-native";
 import * as Font from "expo-font";
 import Constants from "expo-constants";
 import { blackBg, greyHeader, white } from "./utils/color";
@@ -42,7 +42,7 @@ let customFonts = {
 
 export default function App() {
     const [fontsLoaded, setFontsLoaded] = useState(false);
-    const [regLoaded, setRegLoaded] = useState();
+    const [regLoaded, setRegLoaded] = useState(false);
 
     async function loadFontsAsync() {
         await Font.loadAsync(customFonts);
@@ -51,10 +51,7 @@ export default function App() {
         }, 1000);
     }
 
-    useKeepAwake();
-
-    useEffect(() => {
-        loadFontsAsync();
+    function fetchData() {
         Promise.all([
             fetch(goalUrl, {
                 method: "GET",
@@ -73,22 +70,39 @@ export default function App() {
                 // Get a JSON object from each of the responses
                 return Promise.all(
                     responses.map((response) => {
-                        return response.json();
+                        // console.log(response.json());
+                        if (response.status == 200) {
+                            return response.json();
+                        } else {
+                            throw new Error("Server Error!");
+                        }
                     })
                 );
             })
             .then((data) => {
                 // Log the data to the console
                 // You would do something with both sets of data here
+                // console.log(data);
                 setRegLoaded(data);
             })
             .catch((error) => {
                 // if there's an error, log it
-                console.log(error);
+                Alert.alert("Network error ", "Unable to connect to network", [
+                    { text: "Try Again", onPress: () => fetchData() },
+                ]);
             });
+    }
+
+    useKeepAwake();
+
+    useEffect(() => {
+        loadFontsAsync();
+        if (fontsLoaded === false) {
+            fetchData();
+        }
     }, [fontsLoaded, regLoaded]);
 
-    if (!fontsLoaded) {
+    if (!fontsLoaded || !regLoaded) {
         return (
             <>
                 <AppStatusBar backgroundColor={blackBg} style="light" />
@@ -102,7 +116,7 @@ export default function App() {
             <Provider store={store}>
                 <AppStatusBar backgroundColor={greyHeader} style="light" />
                 <RegContext.Provider value={regLoaded}>
-                    <Main />
+                    <PostAuthStack />
                 </RegContext.Provider>
             </Provider>
         );
