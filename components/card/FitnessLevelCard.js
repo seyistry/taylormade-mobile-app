@@ -6,13 +6,12 @@ import IntermediateImg from "../../assets/img/intermediateImg";
 import BeginnerImg from "../../assets/img/beginnerImg";
 
 const img = {
-    beginner: <BeginnerImg />,
-    intermediate: <IntermediateImg />,
-    advance: <AdvanceImg />,
+    BEGINNER: <BeginnerImg />,
+    INTERMEDIATE: <IntermediateImg />,
+    ADVANCE: <AdvanceImg />,
 };
 
 export default function FitnessLevelCard(props) {
-    const link = props.imgLink;
     return (
         <TouchableOpacity
             style={[
