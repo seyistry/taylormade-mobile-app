@@ -16,7 +16,15 @@ import MealInfo from "./screens/meal/MealInfo";
 import Tabs from "./navigation/Tabs";
 import PostAuthStack from "./navigation/PostAuthStack";
 import Main from "./Main";
-import { bodyTypeUrl, goalUrl, motiveUrl } from "./utils/apiLinks";
+import {
+    bodyTypeUrl,
+    fitnessLevelUrl,
+    goalUrl,
+    hindranceUrl,
+    motiveUrl,
+    targetAreaURL,
+    walkoutLocationUrl,
+} from "./utils/apiLinks";
 import { RegContext } from "./utils/RegContext";
 
 function AppStatusBar({ backgroundColor, ...props }) {
@@ -62,6 +70,22 @@ export default function App() {
                 headers: { "Content-Type": "application/json" },
             }),
             fetch(bodyTypeUrl, {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
+            }),
+            fetch(targetAreaURL, {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
+            }),
+            fetch(fitnessLevelUrl, {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
+            }),
+            fetch(hindranceUrl, {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
+            }),
+            fetch(walkoutLocationUrl, {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
             }),
@@ -116,7 +140,7 @@ export default function App() {
             <Provider store={store}>
                 <AppStatusBar backgroundColor={greyHeader} style="light" />
                 <RegContext.Provider value={regLoaded}>
-                    <PostAuthStack />
+                    <Main />
                 </RegContext.Provider>
             </Provider>
         );
