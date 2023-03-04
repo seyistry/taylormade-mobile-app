@@ -4,13 +4,31 @@ import { blackBg, white } from "../../utils/color";
 import MotivateCard from "../../components/card/MotivateCard";
 import ButtonFill from "../../components/button/ButtonFill";
 import DailyCard from "../../components/card/dailyCard";
+import { useContext } from "react";
+import { RegContext } from "../../utils/RegContext";
 
 const StepNine = ({ navigation }) => {
+    const regLoaded = useContext(RegContext);
     const [idOne, setIdOne] = useState(false);
     const [idFive, setIdFive] = useState(false);
     const [idTwo, setIdTwo] = useState(false);
     const [idThree, setIdThree] = useState(false);
     const [idFour, setIdFour] = useState(false);
+
+    const dictSec = {
+        1: () => setIdOne(!idOne),
+        2: () => setIdTwo(!idTwo),
+        3: () => setIdThree(!idThree),
+        4: () => setIdFour(!idFour),
+        5: () => setIdFive(!idFive),
+    };
+    const dictPry = {
+        1: idOne,
+        2: idTwo,
+        3: idThree,
+        4: idFour,
+        5: idFive,
+    };
 
     const handleSubmit = () => {
         navigation.navigate("STEP 10 OF 20");
@@ -24,52 +42,37 @@ const StepNine = ({ navigation }) => {
                     alignItems: "center",
                 }}
             >
-                <Text style={styles.text}>WHAT MOTIVATES YOU TO EXERCISE?</Text>
+                <Text style={styles.text}>
+                    CHOOSE WHAT MIGHT BE YOUR HINDERANCE?
+                </Text>
             </View>
             <View style={{ height: "60%" }}>
-                <MotivateCard
-                    onPress={() => {
-                        setIdOne(!idOne);
-                        setIdFive(false);
-                    }}
-                    fill={idOne}
-                    name="BUSY WORK OR FAMILY LIFE"
-                />
-                <MotivateCard
-                    onPress={() => {
-                        setIdTwo(!idTwo);
-                        setIdFive(false);
-                    }}
-                    fill={idTwo}
-                    name="STRESS OR MENTAL HEALTH"
-                />
-                <MotivateCard
-                    onPress={() => {
-                        setIdThree(!idThree);
-                        setIdFive(false);
-                    }}
-                    fill={idThree}
-                    name="HEALTH OR HORMONAL ISSUES"
-                />
-                <MotivateCard
-                    onPress={() => {
-                        setIdFour(!idFour);
-                        setIdFive(false);
-                    }}
-                    fill={idFour}
-                    name="LACK OF MOTIVATION"
-                />
-                <DailyCard
-                    onPress={() => {
-                        setIdOne(false);
-                        setIdTwo(false);
-                        setIdThree(false);
-                        setIdFour(false);
-                        setIdFive(!idFive);
-                    }}
-                    fill={idFive}
-                    name="NONE OF THE ABOVE"
-                />
+                {regLoaded[5].data.map((item) => {
+                    if (item.description === "NONE OF THE ABOVE") {
+                        return (
+                            <DailyCard
+                                onPress={() => {
+                                    setIdOne(false);
+                                    setIdTwo(false);
+                                    setIdThree(false);
+                                    setIdFour(false);
+                                    setIdFive(!idFive);
+                                }}
+                                fill={idFive}
+                                name="NONE OF THE ABOVE"
+                            />
+                        );
+                    } else {
+                        return (
+                            <MotivateCard
+                                key={item.id}
+                                onPress={() => dictSec[item.id]()}
+                                fill={dictPry[item.id]}
+                                name={item.description}
+                            />
+                        );
+                    }
+                })}
             </View>
             <View
                 style={{

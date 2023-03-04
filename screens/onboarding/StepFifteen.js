@@ -3,8 +3,11 @@ import { useState } from "react";
 import { blackBg, white } from "../../utils/color";
 import ButtonFill from "../../components/button/ButtonFill";
 import BodyTypeCard from "../../components/card/BodyTypeCard";
+import { useContext } from "react";
+import { RegContext } from "../../utils/RegContext";
 
 export default function StepFifteen({ navigation }) {
+    const regLoaded = useContext(RegContext);
     const [id, setId] = useState(false);
     const [toggle, setToggle] = useState(null);
 
@@ -23,28 +26,22 @@ export default function StepFifteen({ navigation }) {
                 <Text style={styles.text}>CHOOSE YOUR WORKOUT LOCATION</Text>
             </View>
             <View style={{ height: "60%" }}>
-                <BodyTypeCard
-                    name="Home"
-                    imageLink={require("../../assets/img/homeWorkout.png")}
-                    onPress={() =>
-                        setId(() => {
-                            setToggle(true);
-                            return 1;
-                        })
-                    }
-                    fill={id === 1 ? true : false}
-                />
-                <BodyTypeCard
-                    name="Gym"
-                    imageLink={require("../../assets/img/gymWorkout.png")}
-                    onPress={() =>
-                        setId(() => {
-                            setToggle(true);
-                            return 2;
-                        })
-                    }
-                    fill={id === 2 ? true : false}
-                />
+                {regLoaded[6].data.map((item) => {
+                    return (
+                        <BodyTypeCard
+                            key={item.id}
+                            name={item.name}
+                            imageLink={item.image}
+                            onPress={() =>
+                                setId(() => {
+                                    setToggle(true);
+                                    return item.id;
+                                })
+                            }
+                            fill={id === item.id ? true : false}
+                        />
+                    );
+                })}
             </View>
             <View
                 style={{
