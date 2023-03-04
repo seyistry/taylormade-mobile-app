@@ -3,8 +3,11 @@ import { useState } from "react";
 import { blackBg, white } from "../../utils/color";
 import ButtonFill from "../../components/button/ButtonFill";
 import FitnessLevelCard from "../../components/card/FitnessLevelCard";
+import { useContext } from "react";
+import { RegContext } from "../../utils/RegContext";
 
 const StepSeven = ({ navigation }) => {
+    const regLoaded = useContext(RegContext);
     const [id, setId] = useState(false);
     const [toggle, setToggle] = useState(null);
 
@@ -23,42 +26,29 @@ const StepSeven = ({ navigation }) => {
                 <Text style={styles.text}>WHAT IS YOUR FITNESS LEVEL?</Text>
             </View>
             <View style={{ height: "60%" }}>
-                <FitnessLevelCard
-                    name="BEGINNER"
-                    nameSub="I’m new to fitness"
-                    imageLink="beginner"
-                    onPress={() =>
-                        setId(() => {
-                            setToggle(true);
-                            return 1;
-                        })
-                    }
-                    fill={id === 1 ? true : false}
-                />
-                <FitnessLevelCard
-                    name="INTERMEDIATE"
-                    nameSub="I work out 2-3 times a week"
-                    imageLink="intermediate"
-                    onPress={() =>
-                        setId(() => {
-                            setToggle(true);
-                            return 2;
-                        })
-                    }
-                    fill={id === 2 ? true : false}
-                />
-                <FitnessLevelCard
-                    name="ADVANCED"
-                    nameSub="I have regular workouts"
-                    imageLink="advance"
-                    onPress={() =>
-                        setId(() => {
-                            setToggle(true);
-                            return 3;
-                        })
-                    }
-                    fill={id === 3 ? true : false}
-                />
+                {regLoaded[4].data
+                    .sort((a, b) => {
+                        if (a.id < b.id) {
+                            return -1;
+                        }
+                    })
+                    .map((item) => {
+                        return (
+                            <FitnessLevelCard
+                                key={item.id}
+                                name={item.name}
+                                nameSub={item.description}
+                                imageLink={item.name}
+                                onPress={() =>
+                                    setId(() => {
+                                        setToggle(true);
+                                        return item.id;
+                                    })
+                                }
+                                fill={id === item.id ? true : false}
+                            />
+                        );
+                    })}
             </View>
             <View
                 style={{
