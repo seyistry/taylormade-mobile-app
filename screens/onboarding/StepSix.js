@@ -3,10 +3,13 @@ import { useState } from "react";
 import { blackBg, white } from "../../utils/color";
 import ButtonFill from "../../components/button/ButtonFill";
 import AreaCard from "../../components/card/AreaCard";
+import { useContext } from "react";
+import { RegContext } from "../../utils/RegContext";
 
 const image = require("../../assets/img/targetAreaBg.png");
 
 const StepSeven = ({ navigation }) => {
+    const regLoaded = useContext(RegContext);
     const [idArms, setIdArms] = useState(false);
     const [idPecs, setIdPecs] = useState(false);
     const [idBelly, setIdBelly] = useState(false);
@@ -40,12 +43,12 @@ const StepSeven = ({ navigation }) => {
                     }}
                 >
                     <AreaCard
-                        name="ARMS"
+                        name={regLoaded[3].data[2].name}
                         onPress={() => setIdArms(!idArms)}
                         fill={idArms}
                     />
                     <AreaCard
-                        name="PECS"
+                        name={regLoaded[3].data[1].name}
                         onPress={() => setIdPecs(!idPecs)}
                         fill={idPecs}
                     />
@@ -58,12 +61,12 @@ const StepSeven = ({ navigation }) => {
                     }}
                 >
                     <AreaCard
-                        name="BELLY"
+                        name={regLoaded[3].data[3].name}
                         onPress={() => setIdBelly(!idBelly)}
                         fill={idBelly}
                     />
                     <AreaCard
-                        name="THIGHS"
+                        name={regLoaded[3].data[0].name}
                         onPress={() => setIdThighs(!idThighs)}
                         fill={idThighs}
                     />
