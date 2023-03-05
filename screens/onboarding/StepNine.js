@@ -51,6 +51,7 @@ const StepNine = ({ navigation }) => {
                     if (item.description === "NONE OF THE ABOVE") {
                         return (
                             <DailyCard
+                                key={item.id}
                                 onPress={() => {
                                     setIdOne(false);
                                     setIdTwo(false);
