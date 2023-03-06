@@ -7,3 +7,4 @@ export const targetAreaURL = `${baseUrl}configurations/targetarea/list`;
 export const fitnessLevelUrl = `${baseUrl}configurations/level/list`;
 export const hindranceUrl = `${baseUrl}configurations/reason/list`;
 export const walkoutLocationUrl = `${baseUrl}configurations/walkoutlocation/list`;
+export const foodUrl = "https://www.themealdb.com/api/json/v1/1/random.php";
