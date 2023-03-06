@@ -8,9 +8,13 @@ import { blackBg, blueBg, greyHeader, white } from "../../utils/color";
 import { dateArrRange, days } from "../../utils/dateRange";
 
 const windowWidth = Dimensions.get("window").width;
-export default function PlanView() {
+export default function PlanView({navigation}) {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const refContainer = useRef(true);
+
+    const handleSubmit = () => {
+        navigation.navigate("workout");
+    };
     useEffect(() => {
         if (refContainer.current) {
             refContainer.current.scrollToIndex({
@@ -87,7 +91,7 @@ export default function PlanView() {
                 >
                     MAIN ACTIVITY
                 </Text>
-                <PlanActivityCard />
+                <PlanActivityCard onPress={handleSubmit} />
                 {/* <PlanActivityCard />
                 <Text
                     style={[

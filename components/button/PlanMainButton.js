@@ -2,9 +2,9 @@ import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import { blueBg, white } from "../../utils/color";
 
-export default function PlanMainButton() {
+export default function PlanMainButton(props) {
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={props.onPress}>
             <Text style={{ fontFamily: "LatoXb", fontSize: 14, color: white }}>
                 START WORKOUT
             </Text>

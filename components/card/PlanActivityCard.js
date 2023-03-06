@@ -3,7 +3,7 @@ import React from "react";
 import { greyBg, greyText, white } from "../../utils/color";
 import PlanMainButton from "../button/PlanMainButton";
 
-export default function PlanActivityCard() {
+export default function PlanActivityCard(props) {
     return (
         <View style={styles.container}>
             <View style={{ justifyContent: "space-around" }}>
@@ -11,7 +11,7 @@ export default function PlanActivityCard() {
                     <Text style={styles.t1}>STRENGTH: HOME</Text>
                     <Text style={styles.t2}>Chest & Shoulders</Text>
                 </View>
-                <PlanMainButton />
+                <PlanMainButton onPress={props.onPress} />
             </View>
             <Image
                 style={{
