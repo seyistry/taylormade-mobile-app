@@ -14,12 +14,11 @@ import { Ionicons, Entypo } from "@expo/vector-icons";
 import { blackBg, greyBg, greyText, white } from "../../utils/color";
 import ButtonFillNone from "../../components/button/ButtonFillNone";
 
-export default function MealInfo() {
+export default function MealInfo({ route, navigation }) {
+    const { strMeal, strMealThumb, strInstructions } = route.params;
     return (
         <View style={styles.container}>
-            <ImageBackground
-                source={require("../../assets/img/exampleMealBg.png")}
-            >
+            <ImageBackground source={{ uri: strMealThumb }}>
                 <View
                     style={{
                         backgroundColor: "rgba(0, 0, 0, 0.4)",
@@ -28,7 +27,10 @@ export default function MealInfo() {
                         padding: 20,
                     }}
                 >
-                    <TouchableOpacity style={{ height: 50, width: 50 }}>
+                    <TouchableOpacity
+                        style={{ height: 50, width: 50 }}
+                        onPress={() => navigation.goBack()}
+                    >
                         <Ionicons
                             name="ios-arrow-back-outline"
                             size={22}
@@ -46,12 +48,12 @@ export default function MealInfo() {
                         fontSize: 20,
                         color: white,
                         paddingHorizontal: "8%",
-                        marginBottom: 10,
+                        // marginBottom: 10,
                     }}
                 >
-                    Salad with Lettuce, Tomato and Croutons
+                    {strMeal}
                 </Text>
-                <View
+                {/* <View
                     style={{
                         flexDirection: "row",
                         alignItems: "center",
@@ -61,8 +63,8 @@ export default function MealInfo() {
                     <Text style={styles.time}>25min</Text>
                     <Entypo name="dot-single" size={22} color={white} />
                     <Text style={styles.time}>Easy</Text>
-                </View>
-                <View
+                </View> */}
+                {/* <View
                     style={{
                         flexDirection: "row",
                         alignItems: "center",
@@ -94,8 +96,8 @@ export default function MealInfo() {
                         <Text style={styles.t1}>41g</Text>
                         <Text style={styles.t2}>fat</Text>
                     </View>
-                </View>
-                <View
+                </View> */}
+                {/* <View
                     style={{
                         flexDirection: "row",
                         justifyContent: "space-between",
@@ -105,7 +107,7 @@ export default function MealInfo() {
                 >
                     <Text style={styles.quantText}>QUANTITY</Text>
                     <Text style={styles.quantText}>For 2 plate</Text>
-                </View>
+                </View> */}
                 <View
                     style={{
                         backgroundColor: "#363636",
@@ -120,204 +122,54 @@ export default function MealInfo() {
                         INGREDIENTS
                     </Text>
                     <View>
-                        <View
-                            style={{
-                                flexDirection: "row",
-                                alignItems: "center",
-                                justifyContent: "space-between",
-                            }}
-                        >
-                            <View
-                                style={{
-                                    flexDirection: "row",
-                                    alignItems: "center",
-                                }}
-                            >
-                                <Entypo
-                                    name="dot-single"
-                                    size={22}
-                                    color={white}
-                                />
-                                <Text style={styles.t3}>Salad</Text>
-                            </View>
-                            <Text style={styles.t3}>100g</Text>
-                        </View>
-                        <View
-                            style={{
-                                flexDirection: "row",
-                                alignItems: "center",
-                                justifyContent: "space-between",
-                            }}
-                        >
-                            <View
-                                style={{
-                                    flexDirection: "row",
-                                    alignItems: "center",
-                                }}
-                            >
-                                <Entypo
-                                    name="dot-single"
-                                    size={22}
-                                    color={white}
-                                />
-                                <Text style={styles.t3}>Salad</Text>
-                            </View>
-                            <Text style={styles.t3}>100g</Text>
-                        </View>
-                        <View
-                            style={{
-                                flexDirection: "row",
-                                alignItems: "center",
-                                justifyContent: "space-between",
-                            }}
-                        >
-                            <View
-                                style={{
-                                    flexDirection: "row",
-                                    alignItems: "center",
-                                }}
-                            >
-                                <Entypo
-                                    name="dot-single"
-                                    size={22}
-                                    color={white}
-                                />
-                                <Text style={styles.t3}>Salad</Text>
-                            </View>
-                            <Text style={styles.t3}>100g</Text>
-                        </View>
-                        <View
-                            style={{
-                                flexDirection: "row",
-                                alignItems: "center",
-                                justifyContent: "space-between",
-                            }}
-                        >
-                            <View
-                                style={{
-                                    flexDirection: "row",
-                                    alignItems: "center",
-                                }}
-                            >
-                                <Entypo
-                                    name="dot-single"
-                                    size={22}
-                                    color={white}
-                                />
-                                <Text style={styles.t3}>Salad</Text>
-                            </View>
-                            <Text style={styles.t3}>100g</Text>
-                        </View>
-                        <View
-                            style={{
-                                flexDirection: "row",
-                                alignItems: "center",
-                                justifyContent: "space-between",
-                            }}
-                        >
-                            <View
-                                style={{
-                                    flexDirection: "row",
-                                    alignItems: "center",
-                                }}
-                            >
-                                <Entypo
-                                    name="dot-single"
-                                    size={22}
-                                    color={white}
-                                />
-                                <Text style={styles.t3}>Salad</Text>
-                            </View>
-                            <Text style={styles.t3}>100g</Text>
-                        </View>
-                        <View
-                            style={{
-                                flexDirection: "row",
-                                alignItems: "center",
-                                justifyContent: "space-between",
-                            }}
-                        >
-                            <View
-                                style={{
-                                    flexDirection: "row",
-                                    alignItems: "center",
-                                }}
-                            >
-                                <Entypo
-                                    name="dot-single"
-                                    size={22}
-                                    color={white}
-                                />
-                                <Text style={styles.t3}>Salad</Text>
-                            </View>
-                            <Text style={styles.t3}>100g</Text>
-                        </View>
-                        <View
-                            style={{
-                                flexDirection: "row",
-                                alignItems: "center",
-                                justifyContent: "space-between",
-                            }}
-                        >
-                            <View
-                                style={{
-                                    flexDirection: "row",
-                                    alignItems: "center",
-                                }}
-                            >
-                                <Entypo
-                                    name="dot-single"
-                                    size={22}
-                                    color={white}
-                                />
-                                <Text style={styles.t3}>Salad</Text>
-                            </View>
-                            <Text style={styles.t3}>100g</Text>
-                        </View>
-                        <View
-                            style={{
-                                flexDirection: "row",
-                                alignItems: "center",
-                                justifyContent: "space-between",
-                            }}
-                        >
-                            <View
-                                style={{
-                                    flexDirection: "row",
-                                    alignItems: "center",
-                                }}
-                            >
-                                <Entypo
-                                    name="dot-single"
-                                    size={22}
-                                    color={white}
-                                />
-                                <Text style={styles.t3}>Salad</Text>
-                            </View>
-                            <Text style={styles.t3}>100g</Text>
-                        </View>
-                        <View
-                            style={{
-                                flexDirection: "row",
-                                alignItems: "center",
-                                justifyContent: "space-between",
-                            }}
-                        >
-                            <View
-                                style={{
-                                    flexDirection: "row",
-                                    alignItems: "center",
-                                }}
-                            >
-                                <Entypo
-                                    name="dot-single"
-                                    size={22}
-                                    color={white}
-                                />
-                                <Text style={styles.t3}>Salad</Text>
-                            </View>
-                            <Text style={styles.t3}>100g</Text>
-                        </View>
+                        {Array.from({ length: 20 }, (x, i) => i + 1).map(
+                            (i) => {
+                                if (
+                                    route.params[`strIngredient${i}`].length > 0
+                                ) {
+                                    return (
+                                        <View key={i}>
+                                            <View
+                                                key={i}
+                                                style={{
+                                                    flexDirection: "row",
+                                                    alignItems: "center",
+                                                    justifyContent:
+                                                        "space-between",
+                                                }}
+                                            >
+                                                <View
+                                                    style={{
+                                                        flexDirection: "row",
+                                                        alignItems: "center",
+                                                    }}
+                                                >
+                                                    <Entypo
+                                                        name="dot-single"
+                                                        size={22}
+                                                        color={white}
+                                                    />
+                                                    <Text style={styles.t3}>
+                                                        {
+                                                            route.params[
+                                                                `strIngredient${i}`
+                                                            ]
+                                                        }
+                                                    </Text>
+                                                </View>
+                                                <Text style={styles.t3}>
+                                                    {
+                                                        route.params[
+                                                            `strMeasure${i}`
+                                                        ]
+                                                    }
+                                                </Text>
+                                            </View>
+                                        </View>
+                                    );
+                                }
+                            }
+                        )}
                     </View>
                 </View>
                 <Text
@@ -329,14 +181,10 @@ export default function MealInfo() {
                     HOW TO COOK
                 </Text>
                 <View style={{ marginHorizontal: "8%" }}>
-                    <Text style={[styles.quantText, styles.t4]}>STEP 1</Text>
-                    <Text style={styles.t5}>
-                        Cook the spaghetti according to the instructions on the
-                        pack. Once cooked, add little lettuce and vegetables to
-                        a large bowl with 5 slice tomatoes.
-                    </Text>
+                    {/* <Text style={[styles.quantText, styles.t4]}>STEP 1</Text> */}
+                    <Text style={styles.t5}>{strInstructions}</Text>
                 </View>
-                <View style={{ marginHorizontal: "8%" }}>
+                {/* <View style={{ marginHorizontal: "8%" }}>
                     <Text style={[styles.quantText, styles.t4]}>STEP 2</Text>
                     <Text style={styles.t5}>
                         Cook the spaghetti according to the instructions on the
@@ -351,7 +199,7 @@ export default function MealInfo() {
                         pack. Once cooked, add little lettuce and vegetables to
                         a large bowl with 5 slice tomatoes.
                     </Text>
-                </View>
+                </View> */}
                 <View style={{ alignItems: "center", marginBottom: 20 }}>
                     <View
                         style={{
@@ -393,6 +241,7 @@ export default function MealInfo() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: blackBg,
     },
     time: {
         color: white,
@@ -435,5 +284,6 @@ const styles = StyleSheet.create({
         color: white,
         marginBottom: 20,
         textAlign: "justify",
+        lineHeight: 20,
     },
 });

@@ -12,17 +12,18 @@ import { Ionicons } from "@expo/vector-icons";
 
 const windowHeight = Dimensions.get("window").height;
 
-export default function MealCard() {
+export default function MealCard(props) {
+    const { foodData, onPress } = props;
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={onPress}>
             <ImageBackground
-                source={require("../../assets/img/exampleMealBg.png")}
+                source={{ uri: foodData.meals[0].strMealThumb }}
                 resizeMode="stretch"
             >
                 <View
                     style={{
                         backgroundColor: "rgba(0, 0, 0, 0.4)",
-                        height: windowHeight * 0.2,
+                        height: windowHeight * 0.3,
                         flexDirection: "row",
                         padding: 20,
                         justifyContent: "space-between",
@@ -37,7 +38,7 @@ export default function MealCard() {
                             width: "70%",
                         }}
                     >
-                        Salad with Lettuce, Tomato and Croutons
+                        {foodData.meals[0].strMeal}
                     </Text>
                     <View
                         style={{
@@ -52,7 +53,7 @@ export default function MealCard() {
                     >
                         <Ionicons name="time" size={16} color="#039000" />
                         <Text style={{ fontFamily: "LatoB", fontSize: 9 }}>
-                            10:00 AM
+                            {props.time}
                         </Text>
                     </View>
                 </View>
