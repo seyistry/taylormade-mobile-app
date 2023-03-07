@@ -22,7 +22,7 @@ export default function PlanActivityCard(props) {
                 <Image
                     style={{
                         flex: 1,
-                        width: "70%",
+                        width: 90,
                         height: "90%",
                         alignSelf: "flex-end",
                         // justifyContent: "flex-start",
