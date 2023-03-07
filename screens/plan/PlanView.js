@@ -8,7 +8,7 @@ import { blackBg, blueBg, greyHeader, white } from "../../utils/color";
 import { dateArrRange, days } from "../../utils/dateRange";
 
 const windowWidth = Dimensions.get("window").width;
-export default function PlanView({navigation}) {
+export default function PlanView({ navigation }) {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const refContainer = useRef(true);
 
@@ -83,7 +83,7 @@ export default function PlanView({navigation}) {
                         {
                             fontFamily: "LatoB",
                             fontSize: 16,
-                            paddingLeft: 20,
+                            marginHorizontal: "5%",
                             // marginTop: 30,
                             marginBottom: 10,
                         },
