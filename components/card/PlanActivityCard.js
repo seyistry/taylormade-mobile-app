@@ -13,15 +13,27 @@ export default function PlanActivityCard(props) {
                 </View>
                 <PlanMainButton onPress={props.onPress} />
             </View>
-            <Image
+            <View
                 style={{
                     flex: 1,
-                    height: "90%",
-                    alignSelf: "flex-end",
+                    // borderWidth: 1,
                 }}
-                source={require("../../assets/img/authImg.png")}
-                resizeMode={"contain"}
-            />
+            >
+                <Image
+                    style={{
+                        flex: 1,
+                        width: "70%",
+                        height: "90%",
+                        alignSelf: "flex-end",
+                        // justifyContent: "flex-start",
+                        // alignContent: "flex-start",
+                        // alignItems: "flex-start",
+                        // borderWidth: 1,
+                    }}
+                    source={require("../../assets/img/authImg.png")}
+                    resizeMode={"contain"}
+                />
+            </View>
         </View>
     );
 }
@@ -34,7 +46,6 @@ const styles = StyleSheet.create({
         marginHorizontal: "5%",
         paddingLeft: 20,
         flexDirection: "row",
-        justifyContent: "space-between",
         marginBottom: 10,
     },
     t1: {
