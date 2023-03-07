@@ -50,6 +50,8 @@ export default function PlanView({ navigation }) {
                 <FlatList
                     ref={refContainer}
                     horizontal={true}
+                    showsHorizontalScrollIndicator={true}
+                    indicatorStyle="white"
                     data={dateArrRange}
                     renderItem={({ item, index }) => (
                         <SingleDateCard
