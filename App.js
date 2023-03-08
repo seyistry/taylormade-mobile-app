@@ -140,7 +140,7 @@ export default function App() {
             <Provider store={store}>
                 <AppStatusBar backgroundColor={greyHeader} style="light" />
                 <RegContext.Provider value={regLoaded}>
-                    <Main />
+                    <PostAuthStack />
                 </RegContext.Provider>
             </Provider>
         );
