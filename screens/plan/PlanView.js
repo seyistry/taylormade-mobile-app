@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { FlatList, Dimensions, Button } from "react-native";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
-import { Agenda, calendarTheme } from "react-native-calendars";
 import PlanActivityCard from "../../components/card/PlanActivityCard";
 import SingleDateCard from "../../components/card/SingleDateCard";
 import { blackBg, blueBg, greyHeader, white } from "../../utils/color";
