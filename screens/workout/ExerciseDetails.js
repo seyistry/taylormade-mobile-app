@@ -89,7 +89,7 @@ export default function ExerciseDetails({ navigation }) {
                         <FlatList
                             horizontal={false}
                             showsVerticalScrollIndicator={true}
-                            data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]}
+                            data={[1, 2, 3, 4, 5]}
                             renderItem={({ item, index }) => (
                                 <View
                                     style={{
@@ -110,9 +110,7 @@ export default function ExerciseDetails({ navigation }) {
                                 </View>
                             )}
                             keyExtractor={(item) =>
-                                [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].indexOf(
-                                    item
-                                )
+                                [1, 2, 3, 4, 5].indexOf(item)
                             }
                             // ItemSeparatorComponent={separators}
                         />
