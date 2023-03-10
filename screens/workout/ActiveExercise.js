@@ -15,14 +15,14 @@ export default function ActiveExercise({ navigation }) {
     const [progress, setProgress] = useState(1);
     const handlePressForward = async () => {
         if (progress < 20) {
-            await setTimeout(() => {
+            setTimeout(() => {
                 setProgress(progress + 1);
             }, 1000);
         }
     };
     const handlePressBackward = async () => {
         if (progress > 1) {
-            await setTimeout(() => {
+            setTimeout(() => {
                 setProgress(progress - 1);
             }, 1000);
         }
