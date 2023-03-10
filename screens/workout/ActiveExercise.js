@@ -13,14 +13,18 @@ import CountDown from "../../utils/CountDown";
 
 export default function ActiveExercise({ navigation }) {
     const [progress, setProgress] = useState(1);
-    const handlePressForward = () => {
+    const handlePressForward = async () => {
         if (progress < 20) {
-            setProgress(progress + 1);
+            await setTimeout(() => {
+                setProgress(progress + 1);
+            }, 1000);
         }
     };
-    const handlePressBackward = () => {
+    const handlePressBackward = async () => {
         if (progress > 1) {
-            setProgress(progress - 1);
+            await setTimeout(() => {
+                setProgress(progress - 1);
+            }, 1000);
         }
     };
 
@@ -79,7 +83,7 @@ export default function ActiveExercise({ navigation }) {
                     }}
                 >
                     <CountDown
-                        id={progress}
+                        id={`${progress}`}
                         until={30}
                         size={40}
                         onFinish={handlePressForward}
