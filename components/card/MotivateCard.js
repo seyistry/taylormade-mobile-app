@@ -1,37 +1,10 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { blackBg, blueBg, greyBg, white } from "../../utils/color";
-import {
-    Octicons,
-    Ionicons,
-    MaterialIcons,
-    MaterialCommunityIcons,
-    Entypo,
-} from "@expo/vector-icons";
-
-const iconsDict = {
-    "BUILDING STRENGTH AND ENDURANCE": (
-        <MaterialCommunityIcons name="run-fast" size={24} color={white} />
-    ),
-    "IMPROVING HEALTH": (
-        <MaterialCommunityIcons
-            name="heart-plus-outline"
-            size={24}
-            color={white}
-        />
-    ),
-    "LOOKING GREAT": <Entypo name="man" size={24} color={white} />,
-    "IMMUNE SYSTEM SUPPORT": (
-        <MaterialCommunityIcons
-            name="head-plus-outline"
-            size={24}
-            color={white}
-        />
-    ),
-    "IMPROVE LIBIDO": <Ionicons name="male" size={30} color={white} />,
-};
+import { Octicons } from "@expo/vector-icons";
 
 export default function MotivateCard(props) {
+    const { description, image } = props;
     return (
         <TouchableOpacity
             style={[
@@ -53,10 +26,14 @@ export default function MotivateCard(props) {
             </View>
 
             <View style={{ width: "60%" }}>
-                <Text style={styles.text}>{props.name}</Text>
+                <Text style={styles.text}>{description}</Text>
             </View>
             <View style={{ width: "20%", alignItems: "center" }}>
-                {iconsDict[props.name]}
+                <Image
+                    style={{ height: "30%", width: "30%" }}
+                    source={{ uri: image }}
+                    resizeMode="contain"
+                />
             </View>
         </TouchableOpacity>
     );

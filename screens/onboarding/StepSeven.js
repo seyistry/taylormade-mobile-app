@@ -38,7 +38,7 @@ const StepSeven = ({ navigation }) => {
                                 key={item.id}
                                 name={item.name}
                                 nameSub={item.description}
-                                imageLink={item.name}
+                                imageLink={item.image}
                                 onPress={() =>
                                     setId(() => {
                                         setToggle(true);

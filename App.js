@@ -26,6 +26,7 @@ import {
     walkoutLocationUrl,
 } from "./utils/apiLinks";
 import { RegContext } from "./utils/RegContext";
+import { FetchRegData } from "./hooks/useFetch";
 
 function AppStatusBar({ backgroundColor, ...props }) {
     return (
@@ -52,79 +53,23 @@ export default function App() {
     const [fontsLoaded, setFontsLoaded] = useState(false);
     const [regLoaded, setRegLoaded] = useState(false);
 
+    const { data, isLoading } = FetchRegData();
+
     async function loadFontsAsync() {
         await Font.loadAsync(customFonts);
-        await setTimeout(() => {
+        setTimeout(() => {
             setFontsLoaded(true);
         }, 1000);
-    }
-
-    function fetchData() {
-        Promise.all([
-            fetch(goalUrl, {
-                method: "GET",
-                headers: { "Content-Type": "application/json" },
-            }),
-            fetch(motiveUrl, {
-                method: "GET",
-                headers: { "Content-Type": "application/json" },
-            }),
-            fetch(bodyTypeUrl, {
-                method: "GET",
-                headers: { "Content-Type": "application/json" },
-            }),
-            fetch(targetAreaURL, {
-                method: "GET",
-                headers: { "Content-Type": "application/json" },
-            }),
-            fetch(fitnessLevelUrl, {
-                method: "GET",
-                headers: { "Content-Type": "application/json" },
-            }),
-            fetch(hindranceUrl, {
-                method: "GET",
-                headers: { "Content-Type": "application/json" },
-            }),
-            fetch(walkoutLocationUrl, {
-                method: "GET",
-                headers: { "Content-Type": "application/json" },
-            }),
-        ])
-            .then((responses) => {
-                // Get a JSON object from each of the responses
-                return Promise.all(
-                    responses.map((response) => {
-                        // console.log(response.json());
-                        if (response.status == 200) {
-                            return response.json();
-                        } else {
-                            throw new Error("Server Error!");
-                        }
-                    })
-                );
-            })
-            .then((data) => {
-                // Log the data to the console
-                // You would do something with both sets of data here
-                // console.log(data);
-                setRegLoaded(data);
-            })
-            .catch((error) => {
-                // if there's an error, log it
-                Alert.alert("Network error ", "Unable to connect to network", [
-                    { text: "Try Again", onPress: () => fetchData() },
-                ]);
-            });
     }
 
     useKeepAwake();
 
     useEffect(() => {
         loadFontsAsync();
-        if (fontsLoaded === false) {
-            fetchData();
+        if (isLoading === false) {
+            setRegLoaded(data);
         }
-    }, [fontsLoaded, regLoaded]);
+    }, [fontsLoaded, isLoading]);
 
     if (!fontsLoaded || !regLoaded) {
         return (
@@ -139,9 +84,11 @@ export default function App() {
         return (
             <Provider store={store}>
                 <AppStatusBar backgroundColor={greyHeader} style="light" />
-                <RegContext.Provider value={regLoaded}>
-                    <PostAuthStack />
-                </RegContext.Provider>
+                <SafeAreaView style={styles.container}>
+                    <RegContext.Provider value={regLoaded}>
+                        <PreAuthStack />
+                    </RegContext.Provider>
+                </SafeAreaView>
             </Provider>
         );
     }

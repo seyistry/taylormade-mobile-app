@@ -69,7 +69,7 @@ const StepNine = ({ navigation }) => {
                                 key={item.id}
                                 onPress={() => dictSec[item.id]()}
                                 fill={dictPry[item.id]}
-                                name={item.description}
+                                {...item}
                             />
                         );
                     }

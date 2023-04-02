@@ -32,7 +32,7 @@ const StepFour = ({ navigation }) => {
                         }
                     })
                     .map((item) => {
-                        if (item.target === "0") {
+                        if (item.target === 0) {
                             return (
                                 <BodyTypeCard
                                     key={item.id}

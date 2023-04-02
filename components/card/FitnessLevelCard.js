@@ -1,15 +1,9 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { blueBg, greyBg, white } from "../../utils/color";
-import AdvanceImg from "../../assets/img/advanceImg";
-import IntermediateImg from "../../assets/img/intermediateImg";
-import BeginnerImg from "../../assets/img/beginnerImg";
 
-const img = {
-    BEGINNER: <BeginnerImg />,
-    INTERMEDIATE: <IntermediateImg />,
-    ADVANCE: <AdvanceImg />,
-};
+
+
 
 export default function FitnessLevelCard(props) {
     return (
@@ -25,7 +19,11 @@ export default function FitnessLevelCard(props) {
                 <Text style={styles.t2}>{props.nameSub}</Text>
             </View>
             <View style={{ justifyContent: "center", marginRight: 20 }}>
-                {img[props.imageLink]}
+                <Image
+                    style={{ height: 60, width: 60 }}
+                    source={{ uri: props.imageLink }}
+                    resizeMode="contain"
+                />
             </View>
         </TouchableOpacity>
     );
