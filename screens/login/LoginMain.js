@@ -19,6 +19,7 @@ import ButtonFill from "../../components/button/ButtonFill";
 import { useState, useEffect } from "react";
 import { loginUrl } from "../../utils/apiLinks";
 import { addUser } from "../../features/auth/user";
+import Loading from "../../components/card/Loading";
 
 const windowHeight = Dimensions.get("window").height;
 
@@ -101,9 +102,7 @@ const LoginMain = ({ navigation }) => {
                     setModalVisible(!modalVisible);
                 }}
             >
-                <View style={styles.modalView}>
-                    <ActivityIndicator size="large" color={blueBg} />
-                </View>
+                <Loading />
             </Modal>
             <ScrollView
                 style={styles.container}
