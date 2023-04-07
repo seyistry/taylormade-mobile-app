@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { useState } from "react";
 import { blackBg, white } from "../../utils/color";
 import ButtonFill from "../../components/button/ButtonFill";
-import DailyCard from "../../components/card/dailyCard";
+import DailyCard from "../../components/card/DailyCard";
 
 const StepEight = ({ navigation }) => {
     const [id, setId] = useState(false);

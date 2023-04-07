@@ -3,7 +3,7 @@ import { useState } from "react";
 import { blackBg, white } from "../../utils/color";
 import MotivateCard from "../../components/card/MotivateCard";
 import ButtonFill from "../../components/button/ButtonFill";
-import DailyCard from "../../components/card/dailyCard";
+import DailyCard from "../../components/card/DailyCard";
 import { useContext } from "react";
 import { RegContext } from "../../utils/RegContext";
 
