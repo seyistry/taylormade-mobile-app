@@ -2,7 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import LoginMain from "../screens/login/LoginMain";
 import StepEight from "../screens/onboarding/StepEight";
-import StepEighteen from "../screens/onboarding/StepEighteen";
+import SubscriptionPlan from "../screens/onboarding/SubscriptionPlan";
 import StepEleven from "../screens/onboarding/StepEleven";
 import StepFifteen from "../screens/onboarding/StepFifteen";
 import StepFive from "../screens/onboarding/StepFive";
@@ -11,9 +11,9 @@ import StepFourteen from "../screens/onboarding/StepFourteen";
 import StepNine from "../screens/onboarding/StepNine";
 import StepOne from "../screens/onboarding/StepOne";
 import StepSeven from "../screens/onboarding/StepSeven";
-import StepSeventeen from "../screens/onboarding/StepSeventeen";
+import PersonalPlan from "../screens/onboarding/PersonalPlan";
 import StepSix from "../screens/onboarding/StepSix";
-import StepSixteen from "../screens/onboarding/StepSixteen";
+import GeneratePlan from "../screens/onboarding/GeneratePlan";
 import StepTen from "../screens/onboarding/StepTen";
 import StepThirteen from "../screens/onboarding/StepThirteen";
 import StepThree from "../screens/onboarding/StepThree";
@@ -21,6 +21,7 @@ import StepTwelve from "../screens/onboarding/StepTwelve";
 import StepTwo from "../screens/onboarding/StepTwo";
 import AuthView from "../screens/splashscreen/AuthView";
 import { white, greyBg, greyHeader } from "../utils/color";
+import RegisterMain from "../screens/onboarding/RegisterMain";
 
 const Stack = createStackNavigator();
 
@@ -70,17 +71,24 @@ function MyStack() {
             <Stack.Screen name="STEP 13 OF 20" component={StepThirteen} />
             <Stack.Screen name="STEP 14 OF 20" component={StepFourteen} />
             <Stack.Screen name="STEP 15 OF 20" component={StepFifteen} />
-            <Stack.Screen name="STEP 16 OF 20" component={StepSixteen} />
+            <Stack.Screen name="STEP 16 OF 20" component={GeneratePlan} />
             <Stack.Screen
                 name="STEP 17 OF 20"
-                component={StepSeventeen}
+                component={PersonalPlan}
                 options={{
                     headerShown: false,
                 }}
             />
             <Stack.Screen
                 name="STEP 18 OF 20"
-                component={StepEighteen}
+                component={RegisterMain}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="STEP 19 OF 20"
+                component={SubscriptionPlan}
                 options={{
                     headerShown: false,
                 }}
