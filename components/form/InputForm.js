@@ -1,18 +1,11 @@
-import {
-    StyleSheet,
-    TextInput,
-    TouchableOpacity,
-    View,
-} from "react-native";
+import { StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { greyText, white } from "../../utils/color";
 import { useState } from "react";
 
 const InputForm = (props) => {
     const [toggle, setToggle] = useState(true);
-    const handleChange = () => {
-
-    }
+    const handleChange = () => {};
     return (
         <>
             <View
@@ -21,7 +14,8 @@ const InputForm = (props) => {
                     { borderBottomColor: props.errorText ? "#ff3737" : white },
                 ]}
             >
-                {props.placeholder === "Password" ? (
+                {props.placeholder === "Password" ||
+                props.placeholder === "Re-type password" ? (
                     <>
                         <Ionicons
                             name="lock-closed-outline"
@@ -52,9 +46,28 @@ const InputForm = (props) => {
                             </TouchableOpacity>
                         )}
                     </>
-                ) : (
+                ) : props.placeholder === "Email" ? (
                     <>
                         <Ionicons name="mail-outline" size={18} color={white} />
+                        <TextInput
+                            style={styles.input}
+                            placeholderTextColor={greyText}
+                            {...props}
+                        />
+                        <Ionicons
+                            name="eye-off-outline"
+                            size={18}
+                            color="rgba(52, 52, 52, 0.0)"
+                        />
+                    </>
+                ) : (
+                    <>
+                        <Ionicons
+                            name="person-outline"
+                            size={18}
+                            color={white}
+                        />
+                        {/* <Ionicons name="mail-outline" size={18} color={white} /> */}
                         <TextInput
                             style={styles.input}
                             placeholderTextColor={greyText}

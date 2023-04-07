@@ -1,5 +1,7 @@
 const baseUrl = "https://taylormade.sanchy.com.ng/public/api/";
 export const loginUrl = `${baseUrl}user/login`;
+export const regUrl = `${baseUrl}user/register`;
+export const userProfileUrl = `${baseUrl}user/profile?`;
 export const goalUrl = `${baseUrl}configurations/goal/list`;
 export const motiveUrl = `${baseUrl}configurations/motivation/list`;
 export const bodyTypeUrl = `${baseUrl}configurations/bodytype/list`;
