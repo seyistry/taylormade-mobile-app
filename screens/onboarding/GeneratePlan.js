@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import CircularProgress from "react-native-circular-progress-indicator";
 import { blackBg, blueBg, white } from "../../utils/color";
 
-export default function StepSixteen({ navigation }) {
+export default function GeneratePlan({ navigation }) {
     return (
         <View style={styles.container}>
             <View

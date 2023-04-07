@@ -8,7 +8,7 @@ import ButtonFill from "../../components/button/ButtonFill";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
-export default function StepSeventeen({ navigation }) {
+export default function PersonalPlan({ navigation }) {
     const handleSubmit = () => {
         navigation.navigate("STEP 18 OF 20");
     };

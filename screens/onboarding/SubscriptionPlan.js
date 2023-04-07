@@ -3,7 +3,7 @@ import React from "react";
 import { greyBg, greyHeader, greyText, white } from "../../utils/color";
 import ButtonFill from "../../components/button/ButtonFill";
 
-export default function StepEighteen({ navigation }) {
+export default function SubscriptionPlan({ navigation }) {
     return (
         <View style={styles.container}>
             <View style={{ height: "40%", justifyContent: "center" }}>
