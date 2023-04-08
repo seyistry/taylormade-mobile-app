@@ -4,11 +4,19 @@ import GoalsCard from "../../components/card/GoalsCard";
 import { blackBg, white } from "../../utils/color";
 import { useState, useContext } from "react";
 import { RegContext } from "../../utils/RegContext";
+import {
+    getLogData,
+    removeLogData,
+    removeRegData,
+    storeRegData,
+} from "../../utils/api";
 
 export default function StepTwo({ navigation }) {
     const [toggle, setToggle] = useState(null);
     const regLoaded = useContext(RegContext);
     const handleSubmit = () => {
+        removeRegData();
+        storeRegData({ goal_id: toggle });
         navigation.navigate("STEP 3 OF 20");
     };
     return (
@@ -29,8 +37,8 @@ export default function StepTwo({ navigation }) {
                             key={item.id}
                             name={item.description}
                             imageLink={item.image}
-                            onPress={() => setToggle(item.description)}
-                            fill={toggle === item.description ? true : false}
+                            onPress={() => setToggle(item.id)}
+                            fill={toggle === item.id ? true : false}
                         />
                     );
                 })}

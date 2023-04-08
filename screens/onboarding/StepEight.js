@@ -3,12 +3,14 @@ import { useState } from "react";
 import { blackBg, white } from "../../utils/color";
 import ButtonFill from "../../components/button/ButtonFill";
 import DailyCard from "../../components/card/DailyCard";
+import { storeRegData } from "../../utils/api";
 
 const StepEight = ({ navigation }) => {
     const [id, setId] = useState(false);
     const [toggle, setToggle] = useState(null);
 
     const handleSubmit = () => {
+        storeRegData({ daily_work: id });
         navigation.navigate("STEP 9 OF 20");
     };
     return (
@@ -28,30 +30,30 @@ const StepEight = ({ navigation }) => {
                     onPress={() =>
                         setId(() => {
                             setToggle(true);
-                            return 1;
+                            return "LESS THAN 1 HOUR";
                         })
                     }
-                    fill={id === 1 ? true : false}
+                    fill={id === "LESS THAN 1 HOUR" ? true : false}
                 />
                 <DailyCard
                     name="1-2 HOURS"
                     onPress={() =>
                         setId(() => {
                             setToggle(true);
-                            return 2;
+                            return "1-2 HOURS";
                         })
                     }
-                    fill={id === 2 ? true : false}
+                    fill={id === "1-2 HOURS" ? true : false}
                 />
                 <DailyCard
                     name="MORE THAN 2 HOURS"
                     onPress={() =>
                         setId(() => {
                             setToggle(true);
-                            return 3;
+                            return "MORE THAN 2 HOURS";
                         })
                     }
-                    fill={id === 3 ? true : false}
+                    fill={id === "MORE THAN 2 HOURS" ? true : false}
                 />
             </View>
             <View

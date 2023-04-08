@@ -5,6 +5,7 @@ import ButtonFill from "../../components/button/ButtonFill";
 import FitnessLevelCard from "../../components/card/FitnessLevelCard";
 import { useContext } from "react";
 import { RegContext } from "../../utils/RegContext";
+import { storeRegData } from "../../utils/api";
 
 const StepSeven = ({ navigation }) => {
     const regLoaded = useContext(RegContext);
@@ -12,6 +13,7 @@ const StepSeven = ({ navigation }) => {
     const [toggle, setToggle] = useState(null);
 
     const handleSubmit = () => {
+        storeRegData({ level_id: id });
         navigation.navigate("STEP 8 OF 20");
     };
     return (

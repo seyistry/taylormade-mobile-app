@@ -5,6 +5,7 @@ import ButtonFill from "../../components/button/ButtonFill";
 import BodyTypeCard from "../../components/card/BodyTypeCard";
 import { useContext } from "react";
 import { RegContext } from "../../utils/RegContext";
+import { storeRegData } from "../../utils/api";
 
 export default function StepFifteen({ navigation }) {
     const regLoaded = useContext(RegContext);
@@ -12,6 +13,7 @@ export default function StepFifteen({ navigation }) {
     const [toggle, setToggle] = useState(null);
 
     const handleSubmit = () => {
+        storeRegData({ walkout_location_id: id });
         navigation.navigate("STEP 16 OF 20");
     };
     return (

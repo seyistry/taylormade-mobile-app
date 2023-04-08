@@ -4,6 +4,7 @@ import { blackBg, white } from "../../utils/color";
 import ButtonFill from "../../components/button/ButtonFill";
 import BodyTypeCard from "../../components/card/BodyTypeCard";
 import { RegContext } from "../../utils/RegContext";
+import { storeRegData } from "../../utils/api";
 
 const StepFive = ({ navigation }) => {
     const regLoaded = useContext(RegContext);
@@ -11,6 +12,7 @@ const StepFive = ({ navigation }) => {
     const [toggle, setToggle] = useState(null);
 
     const handleSubmit = () => {
+        storeRegData({ target_body_type_id: id });
         navigation.navigate("STEP 6 OF 20");
     };
     return (

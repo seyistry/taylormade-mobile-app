@@ -6,6 +6,7 @@ import ButtonFill from "../../components/button/ButtonFill";
 import DailyCard from "../../components/card/DailyCard";
 import { useContext } from "react";
 import { RegContext } from "../../utils/RegContext";
+import { storeRegData } from "../../utils/api";
 
 const StepNine = ({ navigation }) => {
     const regLoaded = useContext(RegContext);
@@ -31,6 +32,7 @@ const StepNine = ({ navigation }) => {
     };
 
     const handleSubmit = () => {
+        storeRegData({ reason_id: 1 });
         navigation.navigate("STEP 10 OF 20");
     };
     return (

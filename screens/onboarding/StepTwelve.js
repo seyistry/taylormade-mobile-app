@@ -4,6 +4,7 @@ import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import WheelPicker from "react-native-wheely";
 import { blackBg, blueBg, greyBg, white } from "../../utils/color";
 import { Entypo } from "@expo/vector-icons";
+import { storeRegData } from "../../utils/api";
 
 const range = (start, end, length = end - start + 1) =>
     Array.from({ length }, (_, i) => start + i);
@@ -21,6 +22,9 @@ export default function StepTwelve({ navigation }) {
     const [change, setChange] = useState(false);
 
     const handleSubmit = () => {
+        storeRegData({
+            current_weight: KgRange[selectedKg] + dotRange[selectedKgDot] / 10,
+        });
         navigation.navigate("STEP 13 OF 20");
     };
 

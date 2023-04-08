@@ -86,7 +86,7 @@ export default function App() {
                 <AppStatusBar backgroundColor={greyHeader} style="light" />
                 <SafeAreaView style={styles.container}>
                     <RegContext.Provider value={regLoaded}>
-                        <PreAuthStack />
+                        <Main />
                     </RegContext.Provider>
                 </SafeAreaView>
             </Provider>

@@ -5,6 +5,7 @@ import ButtonFill from "../../components/button/ButtonFill";
 import AreaCard from "../../components/card/AreaCard";
 import { useContext } from "react";
 import { RegContext } from "../../utils/RegContext";
+import { storeRegData } from "../../utils/api";
 
 const image = require("../../assets/img/targetAreaBg.png");
 
@@ -16,6 +17,12 @@ const StepSeven = ({ navigation }) => {
     const [idThighs, setIdThighs] = useState(false);
 
     const handleSubmit = () => {
+        const list = [];
+        if (idArms === true) list.push("ARMS");
+        if (idPecs === true) list.push("PECS");
+        if (idBelly === true) list.push("BELLY");
+        if (idThighs === true) list.push("THIGHS");
+        storeRegData({ target_areas: list });
         navigation.navigate("STEP 7 OF 20");
     };
     return (

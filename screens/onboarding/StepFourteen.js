@@ -3,6 +3,7 @@ import { useState } from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import WheelPicker from "react-native-wheely";
 import { blackBg, blueBg, greyBg, white } from "../../utils/color";
+import { storeRegData } from "../../utils/api";
 
 const range = (start, end, length = end - start + 1) =>
     Array.from({ length }, (_, i) => start + i);
@@ -14,6 +15,7 @@ export default function StepFourteen({ navigation }) {
     const [change, setChange] = useState(false);
 
     const handleSubmit = () => {
+        storeRegData({ age: range[selectedAge] });
         navigation.navigate("STEP 15 OF 20");
     };
 

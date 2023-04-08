@@ -19,6 +19,7 @@ import ButtonFill from "../../components/button/ButtonFill";
 import { useState, useEffect } from "react";
 import { regUrl } from "../../utils/apiLinks";
 import { addUser } from "../../features/auth/user";
+import { getRegData, removeRegData } from "../../utils/api";
 
 const windowHeight = Dimensions.get("window").height;
 
@@ -35,21 +36,39 @@ const schema = yup
 
 const RegisterMain = ({ navigation }) => {
     // const dispatch = useDispatch();
+    const [req, setReq] = useState(null);
     const [modalVisible, setModalVisible] = useState(false);
+
+    const getBio = async () => {
+        if (req === null) {
+            const help = await getRegData();
+            setReq(help);
+        }
+    };
+
+    useEffect(() => {
+        getBio();
+        console.log(req);
+    }, [req]);
 
     const onSubmit = async (data) => {
         setModalVisible(true);
         delete data.passwordConfirmation;
+        const details = {
+            ...data,
+            ...req,
+        };
         try {
             await fetch(regUrl, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data),
+                body: JSON.stringify(details),
             }).then((response) => {
                 response.json().then((data) => {
                     if (data.status) {
                         Alert.alert("Successful : ", data.message);
                         // dispatch(addUser(data));
+                        removeRegData();
                         navigation.reset({
                             index: 0,
                             routes: [{ name: "Login" }],
@@ -80,22 +99,7 @@ const RegisterMain = ({ navigation }) => {
             name: "",
             password: "",
             passwordConfirmation: "",
-            goal_id: 1,
-            motivation_id: 1,
-            current_body_type_id: 5,
-            current_weight: 90,
-            target_body_type_id: 1,
-            target_areas: ["PECS"],
-            level_id: 2,
-            daily_work: "LESS THAN 1 HOUR",
             pushups: "LESS THAN 1 HOUR",
-            reason_id: 1,
-            height: "182",
-            target_weight: 75,
-            age: 19,
-            walkout_location_id: 1,
-            plan_id: 1,
-            status: 1,
         },
     });
 
@@ -140,21 +144,19 @@ const RegisterMain = ({ navigation }) => {
             >
                 <View
                     style={{
-                        height: 0.3 * windowHeight,
+                        height: 0.25 * windowHeight,
                         alignItems: "center",
                         justifyContent: "flex-end",
                     }}
                 >
-                    <Text style={[styles.text, styles.t1]}>
-                        Set up a user account.
-                    </Text>
+                    <Text style={[styles.text, styles.t1]}>Register Now.</Text>
                     <Text style={[styles.text, styles.t2]}>
                         If you already have an account, please login here
                     </Text>
                 </View>
                 <View
                     style={{
-                        height: 0.4 * windowHeight,
+                        height: 0.45 * windowHeight,
                         justifyContent: "flex-end",
                     }}
                 >
@@ -269,6 +271,7 @@ const { ids, styles } = StyleSheet.create({
     },
     t1: {
         fontFamily: "LatoXb",
+        textTransform: "uppercase",
         paddingBottom: 25,
         "@media (max-width: 700px)": {
             fontSize: 30,

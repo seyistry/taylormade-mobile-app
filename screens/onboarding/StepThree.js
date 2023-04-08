@@ -4,6 +4,7 @@ import { blackBg, white } from "../../utils/color";
 import MotivateCard from "../../components/card/MotivateCard";
 import ButtonFill from "../../components/button/ButtonFill";
 import { RegContext } from "../../utils/RegContext";
+import { storeRegData } from "../../utils/api";
 
 const StepThree = ({ navigation }) => {
     const regLoaded = useContext(RegContext);
@@ -29,6 +30,7 @@ const StepThree = ({ navigation }) => {
     };
 
     const handleSubmit = () => {
+        storeRegData({ motivation_id: 1 });
         navigation.navigate("STEP 4 OF 20");
     };
     return (
