@@ -16,13 +16,17 @@
       "**/*"
     ],
     "ios": {
+      "config": {
+        "usesNonExemptEncryption": false
+      },
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/img/adaptive-icon.png",
         "backgroundColor": "#0C0C0C"
-      }
+      },
+      "package": "com.seyistry.taylormademobileapp"
     },
     "web": {
       "favicon": "./assets/img/favicon.png"
@@ -34,6 +38,11 @@
           "enableGooglePay": true
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "334a8d2d-77a8-482b-83fe-204ed7f609d7"
+      }
+    }
   }
 }

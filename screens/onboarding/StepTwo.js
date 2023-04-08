@@ -17,6 +17,7 @@ export default function StepTwo({ navigation }) {
     const handleSubmit = () => {
         removeRegData();
         storeRegData({ goal_id: toggle });
+        getLogData();
         navigation.navigate("STEP 3 OF 20");
     };
     return (

@@ -8,23 +8,8 @@ import Constants from "expo-constants";
 import { blackBg, greyHeader, white } from "./utils/color";
 import SplashMain from "./screens/splashscreen/SplashMain";
 import React, { useEffect, useState } from "react";
-import PreAuthStack from "./navigation/PreAuthStack";
-import { useSelector, useDispatch } from "react-redux";
-import PlanView from "./screens/plan/PlanView";
-import MealView from "./screens/meal/MealView";
-import MealInfo from "./screens/meal/MealInfo";
-import Tabs from "./navigation/Tabs";
-import PostAuthStack from "./navigation/PostAuthStack";
+import { StripeProvider } from "@stripe/stripe-react-native";
 import Main from "./Main";
-import {
-    bodyTypeUrl,
-    fitnessLevelUrl,
-    goalUrl,
-    hindranceUrl,
-    motiveUrl,
-    targetAreaURL,
-    walkoutLocationUrl,
-} from "./utils/apiLinks";
 import { RegContext } from "./utils/RegContext";
 import { FetchRegData } from "./hooks/useFetch";
 
@@ -82,14 +67,20 @@ export default function App() {
         );
     } else {
         return (
-            <Provider store={store}>
-                <AppStatusBar backgroundColor={greyHeader} style="light" />
-                <SafeAreaView style={styles.container}>
-                    <RegContext.Provider value={regLoaded}>
-                        <Main />
-                    </RegContext.Provider>
-                </SafeAreaView>
-            </Provider>
+            <StripeProvider
+                publishableKey={"pk_test_wBBSXvCrbtZqfe5b2sLEGEWn00FL2kQWms"}
+                urlScheme="your-url-scheme" // required for 3D Secure and bank redirects
+                merchantIdentifier="merchant.com.{{YOUR_APP_NAME}}" // required for Apple Pay
+            >
+                <Provider store={store}>
+                    <AppStatusBar backgroundColor={greyHeader} style="light" />
+                    <SafeAreaView style={styles.container}>
+                        <RegContext.Provider value={regLoaded}>
+                            <Main />
+                        </RegContext.Provider>
+                    </SafeAreaView>
+                </Provider>
+            </StripeProvider>
         );
     }
 }

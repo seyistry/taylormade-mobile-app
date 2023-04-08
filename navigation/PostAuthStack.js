@@ -41,6 +41,8 @@ function MyStack({ token, user }) {
 
 export default function PostAuthStack(props) {
     const { token, user } = props;
+    // console.log(token);
+    // console.log(user);
     return (
         <NavigationContainer>
             <MyStack token={token} user={user} />

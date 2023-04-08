@@ -7,51 +7,48 @@ import PostAuthStack from "./navigation/PostAuthStack";
 import { blackBg } from "./utils/color";
 import { userProfileUrl } from "./utils/apiLinks";
 import Loading from "./components/card/Loading";
-import { removeLogData } from "./utils/api";
+import { getLog } from "./utils/api";
 
 export default function Main() {
     const userValue = useSelector(userState);
     const [user, setUser] = useState(null);
-    // if (userValue !== null) console.log(userValue.data.access_token);
-    // const data = {
-    //     email: "malik@yum.cu",
-    //     password: "qqqqqq",
-    // };
+
+    const token = async () => {
+        const data = await getLog("token");
+        return data;
+    };
 
     const load = async () => {
-        return getLogData();
+        const email = await getLog("email");
+        const password = await getLog("password");
+        return { email, password };
     };
 
     const loadUser = async () => {
-        if (user === null)
-            if (userValue !== null) {
-                await fetch(userProfileUrl + new URLSearchParams(load), {
-                    headers: {
-                        Authorization: `Bearer ${userValue.data.access_token}`,
-                    },
-                })
-                    .then((resp) => resp.json())
-                    .then((json) => {
-                        removeLogData();
-                        setUser(json);
-                    });
-            }
+        const bearer = await token();
+        // console.log(bearer);
+        await fetch(userProfileUrl + new URLSearchParams(load), {
+            headers: {
+                Authorization: `Bearer ${bearer}`,
+            },
+        })
+            .then((resp) => resp.json())
+            .then((json) => {
+                setUser(json);
+            });
     };
 
     useEffect(() => {
-        loadUser();
+        if (user === null) loadUser();
     }, [user]);
 
-    const userBio = loadUser();
+    // const userBio = loadUser();
     return (
         <View style={styles.container}>
             {userValue === null ? (
                 <PreAuthStack />
             ) : user !== null ? (
-                <PostAuthStack
-                    token={userValue.data.access_token}
-                    user={user}
-                />
+                <PostAuthStack token={token} user={user} />
             ) : (
                 <Loading />
             )}

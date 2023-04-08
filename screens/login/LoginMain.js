@@ -20,7 +20,7 @@ import { useState, useEffect } from "react";
 import { loginUrl } from "../../utils/apiLinks";
 import { addUser } from "../../features/auth/user";
 import Loading from "../../components/card/Loading";
-import { storeLogData } from "../../utils/api";
+import { storeLogData, saveLog } from "../../utils/api";
 
 const windowHeight = Dimensions.get("window").height;
 
@@ -46,8 +46,12 @@ const LoginMain = ({ navigation }) => {
                 response.json().then((response) => {
                     if (response.status) {
                         // Alert.alert("Successful : ", response.message);
-                        dispatch(addUser(response));
-                        storeLogData(data)
+
+                        // storeLogData(data)
+                        saveLog("token", response.data.access_token);
+                        saveLog("email", data.email);
+                        saveLog("password", data.password);
+                        dispatch(addUser(response.status));
                         setModalVisible(false);
                     } else {
                         Alert.alert("Error : ", "Invalid details");

@@ -48,7 +48,7 @@ const RegisterMain = ({ navigation }) => {
 
     useEffect(() => {
         getBio();
-        console.log(req);
+        // console.log(req);
     }, [req]);
 
     const onSubmit = async (data) => {

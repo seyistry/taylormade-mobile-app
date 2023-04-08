@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as SecureStore from "expo-secure-store";
 
 const REG_STORAGE_KEY = `)W4"4-)bZ.KkMT6%cM1#X>|axjX0=Q`;
 const LOG_STORAGE_KEY = `|.=wzmG>i&MDK7)?fHmh"X@_y5YGZD`;
@@ -65,9 +66,28 @@ export const getLogData = async () => {
 
 export const removeLogData = async () => {
     try {
-        await AsyncStorage.removeItem(LOG_STORAGE_KEY);
+        const jsonValue = JSON.stringify({
+            password: "*****************",
+        });
+        await AsyncStorage.mergeItem(LOG_STORAGE_KEY, jsonValue);
         console.log("Done");
     } catch (e) {
         console.log(e);
     }
 };
+
+export async function saveLog(key, value) {
+    await SecureStore.setItemAsync(key, value);
+}
+
+export async function getLog(key) {
+    let result = await SecureStore.getItemAsync(key);
+    if (result) {
+        return result;
+    }
+    return null;
+}
+
+export async function removeLog(key) {
+    let result = await SecureStore.deleteItemAsync(key, {});
+}
