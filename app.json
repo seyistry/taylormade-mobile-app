@@ -26,6 +26,14 @@
     },
     "web": {
       "favicon": "./assets/img/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "@stripe/stripe-react-native",
+        {
+          "enableGooglePay": true
+        }
+      ]
+    ]
   }
 }
