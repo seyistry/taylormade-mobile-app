@@ -61,9 +61,9 @@ export default function SubscriptionPlan({ navigation }) {
     const pay = async (amount, plan) => {
         const token = await createPaymentMethod(amount);
         const email = await getLog("email");
-        console.log(plan);
-        console.log(email);
-        console.log(token.id);
+        // console.log(plan);
+        // console.log(email);
+        // console.log(token.id);
         try {
             const response = await fetch(paymentUrl, {
                 method: "POST",
@@ -95,6 +95,7 @@ export default function SubscriptionPlan({ navigation }) {
 
     const createPaymentMethod = async (amount) => {
         const { error, token } = await createPlatformPayToken({
+            
             googlePay: {
                 amount: amount,
                 currencyCode: "USD",

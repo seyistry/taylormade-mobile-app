@@ -2,52 +2,54 @@ import { useState } from "react";
 
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import WheelPicker from "react-native-wheely";
-import { blackBg, blueBg, greyBg, white } from "../../utils/color";
+import { blackBg, blueBg, greyBg, greyText, white } from "../../utils/color";
 import { Entypo } from "@expo/vector-icons";
 import { storeRegData } from "../../utils/api";
+import { Picker, DatePicker } from "react-native-wheel-pick";
 
 const range = (start, end, length = end - start + 1) =>
     Array.from({ length }, (_, i) => start + i);
 
 const feetRange = range(1, 8);
 const inchRange = range(0, 11);
-const cmRange = range(40, 250);
+const cmRange = range(40, 271);
 
 export default function StepEleven({ navigation }) {
-    const [selectedFeet, setSelectedFeet] = useState(4);
-    const [selectedInch, setSelectedInch] = useState(8);
-    const [selectedCm, setSelectedCm] = useState(135);
+    const [selectedFeet, setSelectedFeet] = useState("4");
+    const [selectedInch, setSelectedInch] = useState("8");
+    const [selectedCm, setSelectedCm] = useState("135");
     const [unit, setUnit] = useState("cm");
     const [change, setChange] = useState(false);
 
     const handleSubmit = () => {
-        storeRegData({ height: cmRange[selectedCm] });
+        storeRegData({ height: selectedCm });
         navigation.navigate("STEP 12 OF 20");
     };
 
     function handleCMchange(index) {
         setSelectedCm(index);
-        let valueFeet = Math.trunc(cmRange[index] / 2.54 / 12);
-        let valueInch = Math.trunc(cmRange[index] / 2.54 - 12 * valueFeet);
-        setSelectedFeet(() => feetRange.indexOf(valueFeet));
-        setSelectedInch(() => inchRange.indexOf(valueInch));
+        let valueFeet = Math.trunc(index / 2.54 / 12);
+        let valueInch = Math.trunc(index / 2.54 - 12 * valueFeet);
+        setSelectedFeet(() => valueFeet.toString());
+        setSelectedInch(() => valueInch.toString());
         setChange(true);
     }
 
     function handleFeetChange(index) {
         let value = Math.trunc(
-            (feetRange[index] * 12 + inchRange[selectedInch]) * 2.54
+            (parseInt(index) * 12 + parseInt(selectedInch)) * 2.54
         );
-        setSelectedCm(() => cmRange.indexOf(value));
+        setSelectedCm(() => value.toString());
         setSelectedFeet(index);
         setChange(true);
     }
 
     function handleInchChange(index) {
         let value = Math.trunc(
-            (feetRange[selectedFeet] * 12 + inchRange[index]) * 2.54
+            (parseInt(selectedFeet) * 12 + parseInt(index)) * 2.54
         );
-        setSelectedCm(() => cmRange.indexOf(value));
+        // console.log(value)
+        setSelectedCm(() => value.toString());
         setSelectedInch(index);
         // console.log(index);
         setChange(true);
@@ -91,7 +93,7 @@ export default function StepEleven({ navigation }) {
                             { fontFamily: "LatoL", fontSize: 64 },
                         ]}
                     >
-                        {cmRange[selectedCm]}
+                        {selectedCm}
                         <Text
                             style={{
                                 fontFamily: "LatoR",
@@ -110,11 +112,7 @@ export default function StepEleven({ navigation }) {
                             { fontFamily: "LatoL", fontSize: 64 },
                         ]}
                     >
-                        {feetRange[selectedFeet] +
-                            "'" +
-                            " " +
-                            inchRange[selectedInch] +
-                            '"'}
+                        {selectedFeet + "'" + " " + selectedInch + '"'} 
                     </Text>
                 )}
             </View>
@@ -185,45 +183,57 @@ export default function StepEleven({ navigation }) {
             </TouchableOpacity>
             <View
                 style={{
-                    height: "30%",
+                    height: "100%",
+                    flex: 1,
                 }}
             >
                 {unit === "cm" ? (
-                    <WheelPicker
-                        selectedIndex={selectedCm}
-                        options={cmRange}
-                        onChange={(index) => handleCMchange(index)}
-                        itemHeight={60}
-                        selectedIndicatorStyle={[
-                            styles.wheelIndicator,
-                            {
-                                borderTopWidth: 0.5,
-                                borderBottomWidth: 0.5,
-                                borderColor: greyBg,
-                            },
-                        ]}
-                        itemTextStyle={styles.wheelText}
-                        containerStyle={{ width: "100%" }}
-                        // scaleFunction={(x) => 0.7}
-                        decelerationRate="fast"
+                    <Picker
+                        style={{
+                            backgroundColor: blackBg,
+                            height: 300,
+                        }}
+                        //Android
+                        selectionColor={white}
+                        // itemSpace={40}
+                        selectTextColor={"#FFFFFE"}
+                        textColor={greyText}
+                        textSize={50}
+                        isShowSelectBackground={false}
+                        selectLineColor={greyBg}
+                        selectLineSize={2}
+                        //IOS
+                        itemStyle={{ color: "red" }}
+                        selectedValue={selectedCm}
+                        pickerData={cmRange}
+                        onValueChange={(index) => handleCMchange(index)}
                     />
                 ) : (
                     <View
                         style={{ flexDirection: "row", alignItems: "center" }}
                     >
-                        <WheelPicker
-                            selectedIndex={selectedFeet}
-                            options={feetRange}
-                            onChange={(index) => {
+                        <Picker
+                            style={{
+                                backgroundColor: blackBg,
+                                height: 300,
+                                width: "50%",
+                            }}
+                            //Android
+                            selectionColor={white}
+                            // itemSpace={40}
+                            selectTextColor={"#FFFFFE"}
+                            textColor={greyText}
+                            textSize={50}
+                            isShowSelectBackground={false}
+                            selectLineColor={greyBg}
+                            selectLineSize={2}
+                            //IOS
+                            itemStyle={{ color: "red" }}
+                            selectedValue={selectedFeet}
+                            pickerData={feetRange}
+                            onValueChange={(index) => {
                                 handleFeetChange(index);
                             }}
-                            itemHeight={60}
-                            itemStyle={{ alignItems: "flex-end" }}
-                            selectedIndicatorStyle={styles.wheelIndicator}
-                            itemTextStyle={styles.wheelText}
-                            containerStyle={styles.wheelContainer}
-                            // scaleFunction={(x) => 0.7}
-                            decelerationRate="fast"
                         />
                         <View
                             style={{
@@ -232,27 +242,33 @@ export default function StepEleven({ navigation }) {
                                 position: "absolute",
                                 alignItems: "center",
                                 justifyContent: "center",
-                                height: 60,
-                                borderTopWidth: 0.5,
-                                borderBottomWidth: 0.5,
                                 borderColor: greyBg,
                             }}
                         >
                             <Entypo name="dot-single" size={18} color={white} />
                         </View>
-                        <WheelPicker
-                            selectedIndex={selectedInch}
-                            options={inchRange}
-                            onChange={(index) => {
+                        <Picker
+                            style={{
+                                backgroundColor: blackBg,
+                                height: 300,
+                                width: "50%",
+                            }}
+                            //Android
+                            selectionColor={white}
+                            // itemSpace={40}
+                            selectTextColor={"#FFFFFE"}
+                            textColor={greyText}
+                            textSize={50}
+                            isShowSelectBackground={false}
+                            selectLineColor={greyBg}
+                            selectLineSize={2}
+                            //IOS
+                            itemStyle={{ color: "red" }}
+                            selectedValue={selectedInch}
+                            pickerData={inchRange}
+                            onValueChange={(index) => {
                                 handleInchChange(index);
                             }}
-                            itemHeight={60}
-                            itemStyle={{ alignItems: "flex-start" }}
-                            selectedIndicatorStyle={styles.wheelIndicator}
-                            itemTextStyle={styles.wheelText}
-                            containerStyle={styles.wheelContainer}
-                            // scaleFunction={(x) => 0.7}
-                            decelerationRate="fast"
                         />
                     </View>
                 )}

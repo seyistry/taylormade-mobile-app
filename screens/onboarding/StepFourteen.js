@@ -1,9 +1,9 @@
 import { useState } from "react";
 
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
-import WheelPicker from "react-native-wheely";
-import { blackBg, blueBg, greyBg, white } from "../../utils/color";
+import { blackBg, blueBg, greyBg, greyText, white } from "../../utils/color";
 import { storeRegData } from "../../utils/api";
+import { Picker } from "react-native-wheel-pick";
 
 const range = (start, end, length = end - start + 1) =>
     Array.from({ length }, (_, i) => start + i);
@@ -11,11 +11,11 @@ const range = (start, end, length = end - start + 1) =>
 const ageRange = range(18, 100);
 
 export default function StepFourteen({ navigation }) {
-    const [selectedAge, setSelectedAge] = useState(0);
+    const [selectedAge, setSelectedAge] = useState("25");
     const [change, setChange] = useState(false);
 
     const handleSubmit = () => {
-        storeRegData({ age: range[selectedAge] });
+        storeRegData({ age: selectedAge });
         navigation.navigate("STEP 15 OF 20");
     };
 
@@ -62,7 +62,7 @@ export default function StepFourteen({ navigation }) {
                             { fontFamily: "LatoL", fontSize: 64 },
                         ]}
                     >
-                        {ageRange[selectedAge]}
+                        {selectedAge}
                         <Text
                             style={{
                                 fontFamily: "LatoR",
@@ -100,19 +100,31 @@ export default function StepFourteen({ navigation }) {
             <View
                 style={{
                     height: "30%",
+                    flex: 1,
                 }}
             >
-                <WheelPicker
-                    selectedIndex={selectedAge}
-                    options={ageRange}
-                    onChange={(index) => handleAgeChange(index)}
-                    itemHeight={60}
-                    // itemStyle={{ alignItems: "flex-end" }}
-                    selectedIndicatorStyle={styles.wheelIndicator}
-                    itemTextStyle={styles.wheelText}
-                    containerStyle={styles.wheelContainer}
-                    // scaleFunction={(x) => 0.7}
-                    decelerationRate="fast"
+                <Picker
+                    style={{
+                        backgroundColor: blackBg,
+                        height: 300,
+                    }}
+                    //Android
+                    selectionColor={white}
+                    // itemSpace={40}
+                    selectTextColor={"#FFFFFE"}
+                    textColor={greyText}
+                    textSize={50}
+                    isShowSelectBackground={false}
+                    selectLineColor={greyBg}
+                    selectLineSize={2}
+                    //IOS
+                    itemStyle={{ color: "red" }}
+                    selectedValue={selectedAge}
+                    pickerData={ageRange}
+                    onValueChange={(index) => {
+                        console.log(index);
+                        handleAgeChange(index);
+                    }}
                 />
             </View>
         </View>

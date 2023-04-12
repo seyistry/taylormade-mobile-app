@@ -1,38 +1,38 @@
 import { useState } from "react";
 
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
-import WheelPicker from "react-native-wheely";
-import { blackBg, blueBg, greyBg, white } from "../../utils/color";
+import { blackBg, blueBg, greyBg, greyText, white } from "../../utils/color";
 import { Entypo } from "@expo/vector-icons";
 import { storeRegData } from "../../utils/api";
+import { Picker } from "react-native-wheel-pick";
 
 const range = (start, end, length = end - start + 1) =>
     Array.from({ length }, (_, i) => start + i);
 
 const KgRange = range(30, 150);
-const IbRange = range(66, 330);
+const IbRange = range(66, 332);
 const dotRange = range(0, 9);
 
 export default function StepTwelve({ navigation }) {
-    const [selectedIb, setSelectedIb] = useState(0);
-    const [selectedIbDot, setSelectedIbDot] = useState(0);
-    const [selectedKg, setSelectedKg] = useState(0);
-    const [selectedKgDot, setSelectedKgDot] = useState(0);
+    const [selectedIb, setSelectedIb] = useState("0");
+    const [selectedIbDot, setSelectedIbDot] = useState("0");
+    const [selectedKg, setSelectedKg] = useState("0");
+    const [selectedKgDot, setSelectedKgDot] = useState("0");
     const [unit, setUnit] = useState("kg");
     const [change, setChange] = useState(false);
 
     const handleSubmit = () => {
         storeRegData({
-            current_weight: KgRange[selectedKg] + dotRange[selectedKgDot] / 10,
+            current_weight: parseInt(selectedKg) + parseInt(selectedKgDot) / 10,
         });
         navigation.navigate("STEP 13 OF 20");
     };
 
     function handleIbChange(index) {
         const value = Math.trunc(
-            (IbRange[index] + dotRange[selectedIbDot] / 10) * 0.45359237
+            (parseInt(index) + parseInt(selectedIbDot) / 10) * 0.45359237
         );
-        setSelectedKg(() => KgRange.indexOf(value));
+        setSelectedKg(() => value.toString());
         setSelectedKgDot(0);
         setChange(true);
         setSelectedIb(index);
@@ -40,9 +40,9 @@ export default function StepTwelve({ navigation }) {
 
     function handleIbDotChange(index) {
         const value = Math.trunc(
-            (IbRange[selectedIb] + dotRange[index] / 10) * 0.45359237
+            (parseInt(selectedIb) + parseInt(index) / 10) * 0.45359237
         );
-        setSelectedKg(() => KgRange.indexOf(value));
+        setSelectedKg(() => value.toString());
         setSelectedKgDot(0);
         setChange(true);
         setSelectedIbDot(index);
@@ -50,9 +50,9 @@ export default function StepTwelve({ navigation }) {
 
     function handleKgChange(index) {
         const value = Math.trunc(
-            (KgRange[index] + dotRange[selectedKgDot] / 10) / 0.45359237
+            (parseInt(index) + parseInt(selectedKgDot) / 10) / 0.45359237
         );
-        setSelectedIb(() => IbRange.indexOf(value));
+        setSelectedIb(() => value.toString());
         setSelectedIbDot(0);
         setChange(true);
         setSelectedKg(index);
@@ -60,9 +60,9 @@ export default function StepTwelve({ navigation }) {
 
     function handleKgDotChange(index) {
         const value = Math.trunc(
-            (KgRange[selectedKg] + dotRange[index] / 10) / 0.45359237
+            (parseInt(selectedKg) + parseInt(index) / 10) / 0.45359237
         );
-        setSelectedIb(() => IbRange.indexOf(value));
+        setSelectedIb(() => value.toString());
         setSelectedIbDot(0);
         setChange(true);
         setSelectedKgDot(index);
@@ -106,7 +106,7 @@ export default function StepTwelve({ navigation }) {
                             { fontFamily: "LatoL", fontSize: 64 },
                         ]}
                     >
-                        {KgRange[selectedKg] + "." + dotRange[selectedKgDot]}
+                        {selectedKg + "." + selectedKgDot}
                         <Text
                             style={{
                                 fontFamily: "LatoR",
@@ -125,7 +125,7 @@ export default function StepTwelve({ navigation }) {
                             { fontFamily: "LatoL", fontSize: 64 },
                         ]}
                     >
-                        {IbRange[selectedIb] + "." + dotRange[selectedIbDot]}
+                        {selectedIb + "." + selectedIbDot}
                         <Text
                             style={{
                                 fontFamily: "LatoR",
@@ -217,19 +217,26 @@ export default function StepTwelve({ navigation }) {
                         }}
                     >
                         <View></View>
-                        <WheelPicker
-                            selectedIndex={selectedKg}
-                            options={KgRange}
-                            onChange={(index) => {
-                                handleKgChange(index);
+                        <Picker
+                            style={{
+                                backgroundColor: blackBg,
+                                height: 300,
+                                width: "50%",
                             }}
-                            itemHeight={60}
-                            itemStyle={{ alignItems: "flex-end" }}
-                            selectedIndicatorStyle={styles.wheelIndicator}
-                            itemTextStyle={styles.wheelText}
-                            containerStyle={styles.wheelContainer}
-                            // scaleFunction={(x) => 0.7}
-                            decelerationRate="fast"
+                            //Android
+                            selectionColor={white}
+                            // itemSpace={40}
+                            selectTextColor={"#FFFFFE"}
+                            textColor={greyText}
+                            textSize={50}
+                            isShowSelectBackground={false}
+                            selectLineColor={greyBg}
+                            selectLineSize={2}
+                            //IOS
+                            itemStyle={{ color: "red" }}
+                            selectedValue={selectedKg}
+                            pickerData={KgRange}
+                            onValueChange={(index) => handleKgChange(index)}
                         />
                         <View
                             style={{
@@ -238,46 +245,57 @@ export default function StepTwelve({ navigation }) {
                                 position: "absolute",
                                 alignItems: "center",
                                 justifyContent: "center",
-                                height: 60,
-                                borderTopWidth: 0.5,
-                                borderBottomWidth: 0.5,
                                 borderColor: greyBg,
                             }}
                         >
                             <Entypo name="dot-single" size={18} color={white} />
                         </View>
-                        <WheelPicker
-                            selectedIndex={selectedKgDot}
-                            options={dotRange}
-                            onChange={(index) => {
-                                handleKgDotChange(index);
+                        <Picker
+                            style={{
+                                backgroundColor: blackBg,
+                                height: 300,
+                                width: "50%",
                             }}
-                            itemHeight={60}
-                            itemStyle={{ alignItems: "flex-start" }}
-                            selectedIndicatorStyle={styles.wheelIndicator}
-                            itemTextStyle={styles.wheelText}
-                            containerStyle={styles.wheelContainer}
-                            // scaleFunction={(x) => 0.7}
-                            decelerationRate="fast"
+                            //Android
+                            selectionColor={white}
+                            // itemSpace={40}
+                            selectTextColor={"#FFFFFE"}
+                            textColor={greyText}
+                            textSize={50}
+                            isShowSelectBackground={false}
+                            selectLineColor={greyBg}
+                            selectLineSize={2}
+                            //IOS
+                            itemStyle={{ color: "red" }}
+                            selectedValue={selectedKgDot}
+                            pickerData={dotRange}
+                            onValueChange={(index) => handleKgDotChange(index)}
                         />
                     </View>
                 ) : (
                     <View
                         style={{ flexDirection: "row", alignItems: "center" }}
                     >
-                        <WheelPicker
-                            selectedIndex={selectedIb}
-                            options={IbRange}
-                            onChange={(index) => {
-                                handleIbChange(index);
+                        <Picker
+                            style={{
+                                backgroundColor: blackBg,
+                                height: 300,
+                                width: "50%",
                             }}
-                            itemHeight={60}
-                            itemStyle={{ alignItems: "flex-end" }}
-                            selectedIndicatorStyle={styles.wheelIndicator}
-                            itemTextStyle={styles.wheelText}
-                            containerStyle={styles.wheelContainer}
-                            // scaleFunction={(x) => 0.7}
-                            decelerationRate="fast"
+                            //Android
+                            selectionColor={white}
+                            // itemSpace={40}
+                            selectTextColor={"#FFFFFE"}
+                            textColor={greyText}
+                            textSize={50}
+                            isShowSelectBackground={false}
+                            selectLineColor={greyBg}
+                            selectLineSize={2}
+                            //IOS
+                            itemStyle={{ color: "red" }}
+                            selectedValue={selectedIb}
+                            pickerData={IbRange}
+                            onValueChange={(index) => handleIbChange(index)}
                         />
                         <View
                             style={{
@@ -286,27 +304,31 @@ export default function StepTwelve({ navigation }) {
                                 position: "absolute",
                                 alignItems: "center",
                                 justifyContent: "center",
-                                height: 60,
-                                borderTopWidth: 0.5,
-                                borderBottomWidth: 0.5,
                                 borderColor: greyBg,
                             }}
                         >
                             <Entypo name="dot-single" size={18} color={white} />
                         </View>
-                        <WheelPicker
-                            selectedIndex={selectedIbDot}
-                            options={dotRange}
-                            onChange={(index) => {
-                                handleIbDotChange(index);
+                        <Picker
+                            style={{
+                                backgroundColor: blackBg,
+                                height: 300,
+                                width: "50%",
                             }}
-                            itemHeight={60}
-                            itemStyle={{ alignItems: "flex-start" }}
-                            selectedIndicatorStyle={styles.wheelIndicator}
-                            itemTextStyle={styles.wheelText}
-                            containerStyle={styles.wheelContainer}
-                            // scaleFunction={(x) => 0.7}
-                            decelerationRate="fast"
+                            //Android
+                            selectionColor={white}
+                            // itemSpace={40}
+                            selectTextColor={"#FFFFFE"}
+                            textColor={greyText}
+                            textSize={50}
+                            isShowSelectBackground={false}
+                            selectLineColor={greyBg}
+                            selectLineSize={2}
+                            //IOS
+                            itemStyle={{ color: "red" }}
+                            selectedValue={selectedIbDot}
+                            pickerData={dotRange}
+                            onValueChange={(index) => handleIbDotChange(index)}
                         />
                     </View>
                 )}

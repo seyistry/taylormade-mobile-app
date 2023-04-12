@@ -5,7 +5,6 @@ import { blackBg, white } from "../../utils/color";
 import { useState, useContext } from "react";
 import { RegContext } from "../../utils/RegContext";
 import {
-    getLogData,
     removeLogData,
     removeRegData,
     storeRegData,
@@ -17,7 +16,6 @@ export default function StepTwo({ navigation }) {
     const handleSubmit = () => {
         removeRegData();
         storeRegData({ goal_id: toggle });
-        getLogData();
         navigation.navigate("STEP 3 OF 20");
     };
     return (

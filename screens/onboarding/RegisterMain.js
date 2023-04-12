@@ -58,6 +58,7 @@ const RegisterMain = ({ navigation }) => {
             ...data,
             ...req,
         };
+        console.log(details);
         try {
             await fetch(regUrl, {
                 method: "POST",
@@ -100,6 +101,8 @@ const RegisterMain = ({ navigation }) => {
             password: "",
             passwordConfirmation: "",
             pushups: "LESS THAN 1 HOUR",
+            plan_id: 1,
+            status: 1,
         },
     });
 
