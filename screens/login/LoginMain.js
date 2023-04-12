@@ -49,8 +49,8 @@ const LoginMain = ({ navigation }) => {
 
                         // storeLogData(data)
                         saveLog("token", response.data.access_token);
-                        saveLog("email", data.email);
-                        saveLog("password", data.password);
+                        // saveLog("email", data.email);
+                        // saveLog("password", data.password);
                         dispatch(addUser(response.status));
                         setModalVisible(false);
                     } else {

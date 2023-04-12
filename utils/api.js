@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as SecureStore from "expo-secure-store";
 
 const REG_STORAGE_KEY = `)W4"4-)bZ.KkMT6%cM1#X>|axjX0=Q`;
-const LOG_STORAGE_KEY = `|.=wzmG>i&MDK7)?fHmh"X@_y5YGZD`;
+export const STATUS_STORAGE_KEY = `|.=wzmG>i&MDK7)?fHmh"X@_y5YGZD`;
 
 export const storeRegData = async (value) => {
     try {
@@ -38,38 +38,27 @@ export const removeRegData = async () => {
     }
 };
 
-export const storeLogData = async (value) => {
+export const storeStatus = async (value) => {
     try {
-        const jsonValue = JSON.stringify(value);
-        const stored_data = await AsyncStorage.getItem(LOG_STORAGE_KEY);
-        if (stored_data === null) {
-            // console.log(stored_data)
-            await AsyncStorage.setItem(LOG_STORAGE_KEY, jsonValue);
-        } else {
-            // console.log(stored_data)
-            await AsyncStorage.mergeItem(LOG_STORAGE_KEY, jsonValue);
-        }
+        await AsyncStorage.setItem(STATUS_STORAGE_KEY, jsonValue);
     } catch (e) {
         console.log(e);
     }
 };
 
-export const getLogData = async () => {
-    try {
-        const stored_data = await AsyncStorage.getItem(LOG_STORAGE_KEY);
-        console.log(stored_data);
-        return stored_data === null ? null : JSON.parse(stored_data);
-    } catch (e) {
-        console.log(e);
-    }
-};
+// export const getLogData = async () => {
+//     try {
+//         const stored_data = await AsyncStorage.getItem(STATUS_STORAGE_KEY);
+//         console.log(stored_data);
+//         return stored_data === null ? null : JSON.parse(stored_data);
+//     } catch (e) {
+//         console.log(e);
+//     }
+// };
 
-export const removeLogData = async () => {
+export const removeStatus = async () => {
     try {
-        const jsonValue = JSON.stringify({
-            password: "*****************",
-        });
-        await AsyncStorage.mergeItem(LOG_STORAGE_KEY, jsonValue);
+        await AsyncStorage.removeItem(LOG_STORAGE_KEY, jsonValue);
         console.log("Done");
     } catch (e) {
         console.log(e);
@@ -89,5 +78,5 @@ export async function getLog(key) {
 }
 
 export async function removeLog(key) {
-    let result = await SecureStore.deleteItemAsync(key, {});
+    await SecureStore.deleteItemAsync(key, {});
 }

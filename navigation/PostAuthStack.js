@@ -6,8 +6,10 @@ import ActiveExercise from "../screens/workout/ActiveExercise";
 import ExerciseDetails from "../screens/workout/ExerciseDetails";
 import Tabs from "./Tabs";
 import SubscriptionPlan from "../screens/onboarding/SubscriptionPlan";
-import React, { useEffect, Suspense } from "react";
+import React, { useEffect, Suspense, useState } from "react";
 import { userProfileUrl } from "../utils/apiLinks";
+import Loading from "../components/card/Loading";
+import { getLog } from "../utils/api";
 
 const Stack = createStackNavigator();
 
@@ -39,13 +41,40 @@ function MyStack({ token, user }) {
     );
 }
 
-export default function PostAuthStack(props) {
-    const { token, user } = props;
-    // console.log(token);
-    // console.log(user);
+export default function PostAuthStack() {
+    const [user, setUser] = useState(null);
+
+    const token = async () => {
+        const data = await getLog("token");
+        return data;
+    };
+    const loadUser = async () => {
+        const bearer = await token();
+        // console.log(bearer);
+        await fetch(userProfileUrl, {
+            headers: {
+                Authorization: `Bearer ${bearer}`,
+            },
+        })
+            .then((resp) => resp.json())
+            .then((json) => {
+                console.log(json);
+                if (json.status === true) setUser(json);
+            });
+    };
+
+    useEffect(() => {
+        if (user === null) loadUser();
+        console.log(user);
+    }, [user]);
+
     return (
         <NavigationContainer>
-            <MyStack token={token} user={user} />
+            {user !== null ? (
+                <MyStack token={token} user={user} />
+            ) : (
+                <Loading />
+            )}
         </NavigationContainer>
     );
 }

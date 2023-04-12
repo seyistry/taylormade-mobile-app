@@ -40,6 +40,7 @@
     "react-native-svg": "13.4.0",
     "react-native-wheely": "^0.6.0",
     "react-redux": "^8.0.5",
+    "redux-persist": "^6.0.0",
     "yup": "^0.32.11"
   },
   "devDependencies": {

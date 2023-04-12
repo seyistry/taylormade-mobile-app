@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { useKeepAwake } from "expo-keep-awake";
 import { Provider } from "react-redux";
-import store from "./store";
+import store, { persistor } from "./store";
 import { StyleSheet, View, SafeAreaView, Alert } from "react-native";
 import * as Font from "expo-font";
 import Constants from "expo-constants";
@@ -12,6 +12,7 @@ import { StripeProvider } from "@stripe/stripe-react-native";
 import Main from "./Main";
 import { RegContext } from "./utils/RegContext";
 import { FetchRegData } from "./hooks/useFetch";
+import { PersistGate } from "redux-persist/integration/react";
 
 function AppStatusBar({ backgroundColor, ...props }) {
     return (
@@ -69,16 +70,20 @@ export default function App() {
         return (
             <StripeProvider
                 publishableKey={"pk_test_wBBSXvCrbtZqfe5b2sLEGEWn00FL2kQWms"}
-                urlScheme="your-url-scheme" // required for 3D Secure and bank redirects
                 merchantIdentifier="merchant.com.{{YOUR_APP_NAME}}" // required for Apple Pay
             >
                 <Provider store={store}>
-                    <AppStatusBar backgroundColor={greyHeader} style="light" />
-                    <SafeAreaView style={styles.container}>
-                        <RegContext.Provider value={regLoaded}>
-                            <Main />
-                        </RegContext.Provider>
-                    </SafeAreaView>
+                    <PersistGate loading={null} persistor={persistor}>
+                        <AppStatusBar
+                            backgroundColor={greyHeader}
+                            style="light"
+                        />
+                        <SafeAreaView style={styles.container}>
+                            <RegContext.Provider value={regLoaded}>
+                                <Main />
+                            </RegContext.Provider>
+                        </SafeAreaView>
+                    </PersistGate>
                 </Provider>
             </StripeProvider>
         );
