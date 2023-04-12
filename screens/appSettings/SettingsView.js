@@ -6,6 +6,8 @@ import { Ionicons } from "@expo/vector-icons";
 import Hr from "../../components/card/Hr";
 import { useDispatch } from "react-redux";
 import { removeUser } from "../../features/auth/user";
+import { removeLog } from "../../utils/api";
+import { Alert } from "react-native";
 
 export default function SettingsView({ navigation }) {
     const dispatch = useDispatch();
@@ -51,7 +53,29 @@ export default function SettingsView({ navigation }) {
                     alignItems: "center",
                     padding: 20,
                 }}
-                onPress={() => dispatch(removeUser())}
+                onPress={() => {
+                    Alert.alert(
+                        "Sign Out",
+                        "Are you certain you want to sign out?",
+                        [
+                            {
+                                text: "Cancel",
+                                onPress: () => console.log("Cancel Pressed"),
+                                style: "cancel",
+                            },
+                            {
+                                text: "OK",
+                                onPress: () => {
+                                    console.log("OK Pressed");
+                                    dispatch(removeUser());
+                                    removeLog("token");
+                                    removeLog("email");
+                                    removeLog("password");
+                                },
+                            },
+                        ]
+                    );
+                }}
             >
                 <Ionicons name="ios-log-out" size={22} color={white} />
                 <Text
