@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { blackBg, blueBg, greyBg, greyText, white } from "../../utils/color";
 import { Entypo } from "@expo/vector-icons";
