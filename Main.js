@@ -7,7 +7,7 @@ import { blackBg } from "./utils/color";
 
 export default function Main() {
     const userValue = useSelector(userState);
-    console.log(userValue);
+    // console.log(userValue);
 
     return (
         <View style={styles.container}>

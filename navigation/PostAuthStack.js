@@ -58,14 +58,14 @@ export default function PostAuthStack() {
         })
             .then((resp) => resp.json())
             .then((json) => {
-                console.log(json);
+                // console.log(json);
                 if (json.status === true) setUser(json);
             });
     };
 
     useEffect(() => {
         if (user === null) loadUser();
-        console.log(user);
+        // console.log(user);
     }, [user]);
 
     return (
