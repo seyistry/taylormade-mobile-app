@@ -1,11 +1,10 @@
 import { useState } from "react";
 
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
-import WheelPicker from "react-native-wheely";
 import { blackBg, blueBg, greyBg, greyText, white } from "../../utils/color";
 import { Entypo } from "@expo/vector-icons";
 import { storeRegData } from "../../utils/api";
-import { Picker, DatePicker } from "react-native-wheel-pick";
+import { Picker } from "react-native-wheel-pick";
 
 const range = (start, end, length = end - start + 1) =>
     Array.from({ length }, (_, i) => start + i);
@@ -112,7 +111,7 @@ export default function StepEleven({ navigation }) {
                             { fontFamily: "LatoL", fontSize: 64 },
                         ]}
                     >
-                        {selectedFeet + "'" + " " + selectedInch + '"'} 
+                        {selectedFeet + "'" + " " + selectedInch + '"'}
                     </Text>
                 )}
             </View>
