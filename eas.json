@@ -23,6 +23,11 @@
       "ios": {
         "resourceClass": "m-medium"
       }
+    },
+    "local": {
+      "android": {
+        "buildType": "apk"
+      }
     }
   },
   "submit": {
